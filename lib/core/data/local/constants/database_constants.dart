@@ -7,5 +7,5 @@ class DatabaseConstants {
 
   static const String password = '';
 
-  static const String databaseName = 'expense_tracker.db';
+  static const String databaseName = 'expense_tracker_new.db';
 }

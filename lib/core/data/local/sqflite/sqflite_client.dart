@@ -31,7 +31,7 @@ class SqfliteClient{
         join(await getDatabasesPath(), DatabaseConstants.databaseName),
         onCreate: (db, version) async {
           //first time create database => run init sql
-          final sql = await rootBundle.loadString('assets/db/init.sql');
+          final sql = await rootBundle.loadString('assets/db/init_new.sql');
           final batch = db.batch();
           for (var query in sql.split(';')) {
             final trimmedQuery = query.trim();
