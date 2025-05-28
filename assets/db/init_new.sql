@@ -5,16 +5,16 @@ PRAGMA foreign_keys = false;
 -- ----------------------------
 DROP TABLE IF EXISTS "Assets";
 CREATE TABLE "Assets" (
-  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-  "name" TEXT NOT NULL,
-  "img_name" TEXT NOT NULL,
-  "type" INTEGER NOT NULL,
-  "state" INTEGER NOT NULL,
-  "remark" TEXT NOT NULL,
-  "create_time" INTEGER NOT NULL,
-  "money" INTEGER NOT NULL,
-  "ranking" INTEGER,
-  "init_money" INTEGER NOT NULL
+  "id"           INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name"         TEXT    NOT NULL,
+  "img_name"     TEXT    NOT NULL,
+  "type"         INTEGER NOT NULL,
+  "state"        INTEGER NOT NULL, -- xóa mềm
+  "remark"       TEXT    NOT NULL,
+  "create_time"  INTEGER NOT NULL,
+  "money"        INTEGER NOT NULL,
+  "ranking"      INTEGER,
+  "init_money"   INTEGER NOT NULL
 );
 
 -- ----------------------------
@@ -29,12 +29,12 @@ INSERT INTO "Assets" VALUES (3, 'home_assets_bank_card', 'assets_red_packet', 0,
 -- ----------------------------
 DROP TABLE IF EXISTS "AssetsModifyRecord";
 CREATE TABLE "AssetsModifyRecord" (
-  "assets_id" INTEGER NOT NULL,
-  "money" INTEGER NOT NULL,
-  "money_before" INTEGER NOT NULL,
-  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-  "state" INTEGER NOT NULL,
-  "create_time" INTEGER NOT NULL,
+  "assets_id"     INTEGER NOT NULL,
+  "money"         INTEGER NOT NULL,
+  "money_before"  INTEGER NOT NULL,
+  "id"            INTEGER PRIMARY KEY AUTOINCREMENT,
+  "state"         INTEGER NOT NULL, -- Xóa mềm
+  "create_time"   INTEGER NOT NULL,
   FOREIGN KEY ("assets_id") REFERENCES "Assets" ("id") ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
@@ -44,14 +44,17 @@ CREATE TABLE "AssetsModifyRecord" (
 
 -- ----------------------------
 -- Table structure for AssetsSummaryRecord
+
+-- Track lịch sử tổng tiền của các ví
+-- Khả năng là insert một lần trong ngày vào lúc đăng nhập
 -- ----------------------------
 DROP TABLE IF EXISTS "AssetsSummaryRecord";
 CREATE TABLE "AssetsSummaryRecord" (
-  "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  "time" INTEGER NOT NULL,
-  "assets_id" INTEGER NOT NULL,
-  "assets_money" INTEGER NOT NULL,
-  "liabilities_money" INTEGER NOT NULL
+  "id"                 INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "time"               INTEGER NOT NULL,
+  "assets_id"          INTEGER NOT NULL,
+  "assets_money"       INTEGER NOT NULL,
+  "liabilities_money"  INTEGER NOT NULL
 );
 
 -- ----------------------------
@@ -79,19 +82,19 @@ INSERT INTO "AssetsSummaryRecord" VALUES (16, 1748282243873, 1, 0, 0);
 -- ----------------------------
 DROP TABLE IF EXISTS "AssetsTransferRecord";
 CREATE TABLE "AssetsTransferRecord" (
-  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-  "state" INTEGER NOT NULL,
-  "create_time" INTEGER NOT NULL,
-  "time" INTEGER NOT NULL,
-  "assets_id_form" INTEGER NOT NULL,
-  "assets_id_to" INTEGER NOT NULL,
-  "remark" TEXT NOT NULL,
-  "money" INTEGER NOT NULL,
-  "charge" INTEGER NOT NULL,
-  "recurrence_id" INTEGER NOT NULL,
-  "ledger_id" INTEGER NOT NULL,
-  "star" INTEGER NOT NULL,
-  FOREIGN KEY ("assets_id_form") REFERENCES "Assets" ("id") ON DELETE CASCADE ON UPDATE NO ACTION,
+  "id"              INTEGER PRIMARY KEY AUTOINCREMENT,
+  "state"           INTEGER NOT NULL, -- xóa mềm, 0 chưa xóa, 1 xóa rồi (khả năng)
+  "create_time"     INTEGER NOT NULL,
+  "time"            INTEGER NOT NULL,
+  "assets_id_from"  INTEGER NOT NULL, -- trans từ ví nào
+  "assets_id_to"    INTEGER NOT NULL, -- trans sang ví nào
+  "remark"          TEXT    NOT NULL,
+  "money"           INTEGER NOT NULL,
+  "charge"          INTEGER NOT NULL, -- Phí chuyển tiền
+  "recurrence_id"   INTEGER NOT NULL, -- Đ biết
+  "ledger_id"       INTEGER NOT NULL,
+  "star"            INTEGER NOT NULL,
+  FOREIGN KEY ("assets_id_from") REFERENCES "Assets" ("id") ON DELETE CASCADE ON UPDATE NO ACTION,
   FOREIGN KEY ("assets_id_to") REFERENCES "Assets" ("id") ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
@@ -105,11 +108,11 @@ INSERT INTO "AssetsTransferRecord" VALUES (1, 0, 1748368643759, 1748368561412, 2
 -- ----------------------------
 DROP TABLE IF EXISTS "Budget";
 CREATE TABLE "Budget" (
-  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-  "record_type_id" INTEGER NOT NULL,
-  "remark" TEXT NOT NULL,
-  "month" INTEGER,
-  "money" INTEGER NOT NULL
+  "id"             INTEGER PRIMARY KEY AUTOINCREMENT,
+  "record_type_id" INTEGER NOT NULL, -- Budget chỉ track 1 record_type
+  "remark"         TEXT    NOT NULL,
+  "month"          INTEGER,          -- Trong tháng nào - năm nào
+  "money"          INTEGER NOT NULL  -- Giới hạn budget
 );
 
 -- ----------------------------
@@ -122,13 +125,13 @@ INSERT INTO "Budget" VALUES (1, -1, '', 1748442620584, 200000000);
 -- ----------------------------
 DROP TABLE IF EXISTS "Ledger";
 CREATE TABLE "Ledger" (
-  "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  "create_time" INTEGER NOT NULL,
-  "name" TEXT NOT NULL,
-  "remark" TEXT,
-  "img_name" TEXT NOT NULL,
-  "state" INTEGER NOT NULL,
-  "deletable" INTEGER NOT NULL
+  "id"           INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "create_time"  INTEGER NOT NULL,
+  "name"         TEXT    NOT NULL,
+  "remark"       TEXT,
+  "img_name"     TEXT    NOT NULL,
+  "state"        INTEGER NOT NULL, -- Chưa biết
+  "deletable"    INTEGER NOT NULL  -- Chưa biết
 );
 
 -- ----------------------------
@@ -138,25 +141,29 @@ INSERT INTO "Ledger" VALUES (1, 1741254397052, 'ledger_default_name', NULL, 'typ
 
 -- ----------------------------
 -- Table structure for Record
+-- Xóa cứng
+-- "money" -> rule: giới hạn số tiền dưới 12 chữ số ( < 999999999999)
+-- "money" -> độ chính xác: 4 chữ số sau .
 -- ----------------------------
 DROP TABLE IF EXISTS "Record";
 CREATE TABLE "Record" (
-  "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  "money" INTEGER,
-  "remark" TEXT,
-  "time" INTEGER,
-  "create_time" INTEGER,
+  "id"             INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "money"          INTEGER,          -- format tiền {phần nguyên}{phần thập phân - 4 chữ số cuối}
+  "remark"         TEXT,             
+  "time"           INTEGER,          -- Đoán: thời gian khi ấn nút tạo
+  "create_time"    INTEGER,          -- Đoán: thời gian khi tạo xong
   "record_type_id" INTEGER NOT NULL,
-  "assets_id" INTEGER,
-  "recurrence_id" INTEGER NOT NULL,
-  "ledger_id" INTEGER NOT NULL,
-  "star" INTEGER NOT NULL,
+  "assets_id"      INTEGER,          -- ví nào
+  "recurrence_id"  INTEGER NOT NULL, -- Đ biết =))
+  "ledger_id"      INTEGER NOT NULL, -- Sổ nào
+  "star"           INTEGER NOT NULL,
   FOREIGN KEY ("record_type_id") REFERENCES "RecordType" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY ("assets_id") REFERENCES "Assets" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 -- ----------------------------
 -- Records of Record
+-- Căn cứ vào record type để biết được là record là income hay expense
 -- ----------------------------
 INSERT INTO "Record" VALUES (1, 12300000, 'hhh', 1748361599044, 1748361617282, 14, 3, -1, 1, 0);
 INSERT INTO "Record" VALUES (2, 700000, '', 1748361900102, 1748361909105, 9, 3, -1, 1, 0);
@@ -170,13 +177,13 @@ INSERT INTO "Record" VALUES (6, 6000000, '', 1748442642785, 1748442648082, 17, 2
 -- ----------------------------
 DROP TABLE IF EXISTS "RecordType";
 CREATE TABLE "RecordType" (
-  "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  "name" TEXT,
-  "img_name" TEXT,
-  "type" INTEGER NOT NULL,
-  "ranking" INTEGER NOT NULL,
-  "state" INTEGER NOT NULL,
-  "parent_id" INTEGER NOT NULL
+  "id"        INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "name"      TEXT,
+  "img_name"  TEXT,
+  "type"      INTEGER NOT NULL, -- 0: expense, 1: income
+  "ranking"   INTEGER NOT NULL, -- Thứ tự sort hiển thị của record type
+  "state"     INTEGER NOT NULL, -- TODO: đang đ biết là gì =))
+  "parent_id" INTEGER NOT NULL  -- -1 là đ có parent
 );
 
 -- ----------------------------
@@ -223,6 +230,7 @@ INSERT INTO "RecordType" VALUES (38, 'type_income_other', 'type_income_other', 1
 
 -- ----------------------------
 -- Table structure for Recurrence
+-- TODO: Điều tra sau
 -- ----------------------------
 DROP TABLE IF EXISTS "Recurrence";
 CREATE TABLE "Recurrence" (
@@ -252,6 +260,7 @@ CREATE TABLE "Recurrence" (
 
 -- ----------------------------
 -- Table structure for Reimburse
+-- TODO: Điều tra sau
 -- ----------------------------
 DROP TABLE IF EXISTS "Reimburse";
 CREATE TABLE "Reimburse" (
@@ -280,13 +289,15 @@ CREATE TABLE "Reimburse" (
 -- ----------------------------
 DROP TABLE IF EXISTS "android_metadata";
 CREATE TABLE "android_metadata" (
-  "locale" TEXT
+  "locale" TEXT,
+  "currency" TEXT
 );
 
 -- ----------------------------
 -- Records of android_metadata
 -- ----------------------------
-INSERT INTO "android_metadata" VALUES ('en_US');
+INSERT INTO "android_metadata" VALUES ('en_US', 'VND');
+
 
 -- ----------------------------
 -- Table structure for room_master_table
@@ -350,9 +361,9 @@ UPDATE "sqlite_sequence" SET seq = 1 WHERE name = 'AssetsTransferRecord';
 -- ----------------------------
 -- Indexes structure for table AssetsTransferRecord
 -- ----------------------------
-CREATE INDEX "index_AssetsTransferRecord_assets_id_form_assets_id_to"
+CREATE INDEX "index_AssetsTransferRecord_assets_id_from_assets_id_to"
 ON "AssetsTransferRecord" (
-  "assets_id_form" ASC,
+  "assets_id_from" ASC,
   "assets_id_to" ASC
 );
 
