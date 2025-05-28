@@ -10,9 +10,10 @@ class WalletStore = _WalletStoreBase with _$WalletStore;
 abstract class _WalletStoreBase with Store {
    late final WalletService _walletService;
 
-  _WalletStoreBase() {
+  _WalletStoreBase(WalletService walletService) {
     debugPrint("WalletStore: init");
-    _walletService = WalletService();
+    _walletService = walletService;
+    fetchWalletData();
   }
 
   @observable

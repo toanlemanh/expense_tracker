@@ -3,18 +3,20 @@ import 'package:expense_tracker/core/data/network/dio_client.dart';
 
 class WalletService {
   // class Service này tổng hợp tất cả các service liên quan đến DB và API (nếu cócó) 
-  final DioClient _dioClient = DioClient();
-  final SqfliteClient _sqfliteClient = SqfliteClient();
-  static final WalletService _instance = WalletService._internal();
+  late final DioClient? _dioClient;
+  late final SqfliteClient _sqfliteClient;
+  static WalletService? _instance;
 
   // Private named constructor
-  WalletService._internal(){
+  WalletService._internal({DioClient? dioClient, required SqfliteClient sqfliteClient}){
     // print("WalletService init: ${_sqfliteClient.openConnectionToDb()}");
-    fetchWalletData();
-
+    _dioClient = dioClient;
+    _sqfliteClient = sqfliteClient;
   }
-  // Public factory always returns the same instance
-  factory WalletService() => _instance;
+  
+  factory WalletService({DioClient? dioClient, required SqfliteClient sqfliteClient}) {
+    return _instance ??= WalletService._internal(dioClient : dioClient, sqfliteClient : sqfliteClient);
+  }
 
 
   Future<void> fetchWalletData() async {
