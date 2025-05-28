@@ -1,5 +1,6 @@
 import 'package:expense_tracker/core/data/local/sqflite/sqflite_client.dart';
 import 'package:expense_tracker/core/data/network/dio_client.dart';
+import 'package:expense_tracker/features/wallet/model/wallet.dart';
 
 class WalletService {
   // class Service này tổng hợp tất cả các service liên quan đến DB và API (nếu cócó) 
@@ -19,12 +20,13 @@ class WalletService {
   }
 
 
-  Future<void> fetchWalletData() async {
+  Future<List<Wallet>> fetchWalletData() async {
     try {
       final db = await _sqfliteClient.openConnectionToDb();
       final List<Map<String, dynamic>> maps = await db.query('wallet');
-      print("Fetched Wallets: $maps");
-      
+      List<Wallet> wallets = maps.map((map) => Wallet.fromMap(map)).toList();
+      // print("Fetched Wallets: $maps");
+      return wallets;
       
     } catch (e) {
       throw Exception('Failed to fetch wallet data: $e');
