@@ -125,7 +125,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-      - assets/db/init.sql
+      - assets/db/init_new.sql
       # - assets/images/default.png
 
   # The following line ensures that the Material Icons font is

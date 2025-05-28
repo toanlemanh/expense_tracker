@@ -317,22 +317,11 @@ INSERT INTO "room_master_table" VALUES (42, '2573617bb0811885d5ed9de012d19f84');
 -- ----------------------------
 -- Table structure for sqlite_sequence
 -- ----------------------------
-DROP TABLE IF EXISTS "sqlite_sequence";
-CREATE TABLE "sqlite_sequence" (
-  "name" ,
-  "seq" 
-);
 
 -- ----------------------------
 -- Records of sqlite_sequence
 -- ----------------------------
-INSERT INTO "sqlite_sequence" VALUES ('Ledger', 1);
-INSERT INTO "sqlite_sequence" VALUES ('RecordType', 38);
-INSERT INTO "sqlite_sequence" VALUES ('Assets', 3);
-INSERT INTO "sqlite_sequence" VALUES ('AssetsSummaryRecord', 16);
-INSERT INTO "sqlite_sequence" VALUES ('Record', 6);
-INSERT INTO "sqlite_sequence" VALUES ('AssetsTransferRecord', 1);
-INSERT INTO "sqlite_sequence" VALUES ('Budget', 1);
+
 
 -- ----------------------------
 -- Auto increment value for Assets

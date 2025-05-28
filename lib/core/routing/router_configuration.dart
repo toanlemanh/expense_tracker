@@ -1,6 +1,6 @@
 import 'package:expense_tracker/features/home/view/home_screen.dart';
 import 'package:expense_tracker/features/setting/view/setting_screen.dart';
-import 'package:expense_tracker/features/wallet/view/wallet_screen.dart';
+import 'package:expense_tracker/features/asset/view/wallet_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../main.dart';

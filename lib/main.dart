@@ -1,7 +1,7 @@
 import 'package:expense_tracker/core/data/local/sqflite/sqflite_client.dart';
 import 'package:expense_tracker/core/data/network/dio_client.dart';
-import 'package:expense_tracker/features/wallet/service/wallet_service.dart';
-import 'package:expense_tracker/features/wallet/viewmodel/wallet_store.dart';
+import 'package:expense_tracker/features/asset/service/asset_service.dart';
+import 'package:expense_tracker/features/asset/viewmodel/asset_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'core/routing/app_routes.dart';
@@ -12,12 +12,12 @@ import 'core/routing/router_configuration.dart';
 
 void main() async {
   //init service 
-  late final walletService = WalletService(dioClient: DioClient(), sqfliteClient: SqfliteClient());
+  late final assetService = AssetService(dioClient: DioClient(), sqfliteClient: SqfliteClient());
   
   runApp(
     MultiProvider(providers: [
-      Provider<WalletStore>(
-        create: (_) => WalletStore(walletService),
+      Provider<AssetStore>(
+        create: (_) => AssetStore(assetService),
         lazy: false, // comment cái này để disable lazy loading 
       ),
     ], child: const MyApp()),
