@@ -12,6 +12,7 @@
 .swiftpm/
 migrate_working_dir/
 
+
 # IntelliJ related
 *.iml
 *.ipr
@@ -44,4 +45,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+
+# lemanhtoan Local test
 /lib/test
