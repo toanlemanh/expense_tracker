@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/widgets/inner_body.dart';
 import 'package:flutter/cupertino.dart';
 
 class WalletScreen extends StatelessWidget{
@@ -5,6 +6,6 @@ class WalletScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Wallet Screen");
+    return InnerBody();
   }
 }
