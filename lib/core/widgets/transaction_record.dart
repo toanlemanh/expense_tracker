@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:expense_tracker/core/widgets/transaction_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 class TransactionTile extends StatelessWidget {
@@ -8,9 +7,9 @@ class TransactionTile extends StatelessWidget {
   final int itemColor;
   const TransactionTile({
     required this.title,
-    required this.itemColor, // sửa ở đây
-    Key? key, // sửa kiểu `key`
-  }) : super(key: key); // truyền `key` lên cha
+    required this.itemColor, 
+    super.key, 
+  }); 
 
   @override
   Widget build(BuildContext context) {
@@ -19,48 +18,31 @@ class TransactionTile extends StatelessWidget {
       alignment: TimelineAlign.manual,
       isFirst: false,
       hasIndicator: true,
-  
-
       indicatorStyle: IndicatorStyle(
-                    width: 60,
-                    height: 30,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                    ),
-                    drawGap: true,
-                    indicator: Container(
-                
-                      alignment: Alignment.center,
-                      child: const Text(
-                          '23:00',
-                          style: TextStyle(
-                            color: Colors.deepOrange,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                
-                  ),
-     
+        width: 60,
+        height: 30,
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        drawGap: true,
+        indicator: TransactionIndicator(itemColor: itemColor, itemTitle: title),
+      ),
+
       beforeLineStyle: LineStyle(color: Color(itemColor)),
-      endChild: buildContent(context),
-      // startChild: Padding(
-      //   padding: const EdgeInsets.all(5.0),
-      //   child: const Text('23:05'),
-      // ),
+      endChild: buildTransactionTile(context),
     );
   }
 
-  Widget buildContent(BuildContext context) {
+  Widget buildTransactionTile(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xFFC7E9E8),
-          borderRadius: BorderRadius.circular(12),
+          color: Color(itemColor), // sử dụng itemColor
+          borderRadius: BorderRadius.circular(20),
         ),
         child: ListTile(
           // tileColor: Color(0xFFC7E9E8),
+          contentPadding: EdgeInsets.only(left: 8, right: 20),
+          dense: true, // giảm khoảng cách giữa các dòng
           title: Row(
             children: [
               Text(title),
@@ -70,8 +52,8 @@ class TransactionTile extends StatelessWidget {
           ),
           subtitle: const Text('23:05'),
           leading: SizedBox(
-            width: 40,
-            height: 40,
+            width: 50,
+            height: 50,
 
             child: Container(
               // padding: EdgeInsets.all(2.0),
@@ -80,7 +62,7 @@ class TransactionTile extends StatelessWidget {
               // foregroundDecoration:
               BoxDecoration(
                 color: Color(0xff45e0fc), // lớp phủ đen mờ
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(15),
               ),
               child: Center(child: Icon(Icons.shop, color: Colors.black)),
             ),
@@ -88,7 +70,7 @@ class TransactionTile extends StatelessWidget {
           trailing: Text(
             '-12000',
             style: TextStyle(
-              color: Colors.red,
+              color: Color.fromARGB(255, 255, 90, 7),
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
