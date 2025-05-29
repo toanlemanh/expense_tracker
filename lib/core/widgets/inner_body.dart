@@ -8,14 +8,9 @@ class InnerBody extends StatefulWidget {
 }
 
 class _InnerBodyState extends State<InnerBody> {
-  double top = 200;
-  double _initialTop = 200;
-  bool _isDragging = false;
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return const Text('inner body');
   }
 }
