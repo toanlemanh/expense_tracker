@@ -1,6 +1,9 @@
 import 'package:expense_tracker/features/home/view/home_screen.dart';
 import 'package:expense_tracker/features/setting/view/setting_screen.dart';
 import 'package:expense_tracker/features/asset/view/wallet_screen.dart';
+import 'package:expense_tracker/presentation/expense_list/expense_list_page.dart';
+import 'package:expense_tracker/presentation/layout/single_scrollable_sheet.dart';
+import 'package:expense_tracker/presentation/statistic/money_statistic_page.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../main.dart';
@@ -18,17 +21,17 @@ final routerConfigurations = GoRouter(
       GoRoute(
         path: AppRoutes.home.path,
         name: AppRoutes.home.name,
-        builder: (context, state) => HomeScreen(),
+        builder: (context, state) => SingleScrollableSheet(child: ExpenseListPage()),
       ),
       GoRoute(
         path: AppRoutes.wallet.path,
         name: AppRoutes.wallet.name,
-        builder: (context, state) => WalletScreen(),
+        builder: (context, state) => SingleScrollableSheet(child: ExpenseStatisticPage()),
       ),
       GoRoute(
         path: AppRoutes.setting.path,
         name: AppRoutes.setting.name,
-        builder: (context, state) => SettingScreen(),
+        builder: (context, state) => SingleScrollableSheet(child: ExpenseListPage()),
       ),
     ]),
   ],

@@ -2,10 +2,10 @@ import 'package:expense_tracker/core/widgets/transaction_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
-class TransactionTile extends StatelessWidget {
+class TransactionRecord extends StatelessWidget {
   final String title;
   final int itemColor;
-  const TransactionTile({
+  const TransactionRecord({
     required this.title,
     required this.itemColor, 
     super.key, 
