@@ -99,14 +99,15 @@ class _MainScaffoldState extends State<MainScaffold>
       backgroundColor: appColors['background']!,
       body: Stack(
         children: [
-          // Top bar
+          // Top container
           Positioned(
             top: 0,
             left: 0,
             right: 0,
-            height: screenHeight * 0.3,
+            height: screenHeight * 0.32,
             child: _buildTopBar(),
           ),
+          //_buildTopBar(),
 
           // Page content
           PageView(
@@ -178,15 +179,143 @@ class _MainScaffoldState extends State<MainScaffold>
 
   Widget _buildTopBar() {
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Chip(label: Text("Default ledger", style: TextStyle(fontSize: 16))),
-            Chip(label: Text("Setup Budget")),
-          ],
-        ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Chip(
+                  label: Text("Default ledger", style: TextStyle(fontSize: 16)),
+                ),
+                Chip(label: Text("Setup Budget")),
+              ],
+            ),
+          ),
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Positioned(
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Image.asset(
+                    'assets/icons/tungtungtungsahur.png',
+                    width: 135, // control size to avoid cropping
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      //Section cho Expense
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Container(
+                          color: Colors.red,
+                          child: Column(
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  text: 'May Expense',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
+                                  children: [
+                                    WidgetSpan(
+                                      child: Icon(
+                                        Icons.info,
+                                        size: 18,
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              RichText(
+                                text: TextSpan(
+                                  text: '0',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: ' VND',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 50),
+                      //Section cho Income
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Container(
+                          color: Colors.red,
+                          child: Column(
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  text: 'May Expense',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
+                                  children: [
+                                    WidgetSpan(
+                                      child: Icon(
+                                        Icons.info,
+                                        size: 18,
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              RichText(
+                                text: TextSpan(
+                                  text: '0',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: ' VND',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
