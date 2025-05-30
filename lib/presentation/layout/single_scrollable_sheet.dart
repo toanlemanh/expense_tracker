@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class SingleScrollableSheet extends StatelessWidget {
@@ -18,8 +19,8 @@ class SingleScrollableSheet extends StatelessWidget {
       expand: false,
       builder: (context, scrollController) {
         return Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
+          decoration: BoxDecoration(
+            color: appColors['pannel']!,
             borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
           ),
           child: Column(

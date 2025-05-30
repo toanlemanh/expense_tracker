@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:expense_tracker/core/data/local/sqflite/sqflite_client.dart';
 import 'package:expense_tracker/core/data/network/dio_client.dart';
 import 'package:expense_tracker/core/routing/app_routes.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Expense Tracker',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: appColors['background']!),
         fontFamily: 'JetBrainsMono',
         
       ),
@@ -96,7 +97,7 @@ class _MainScaffoldState extends State<MainScaffold>
     final pageController = PageController();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFDEBD0),
+      backgroundColor: appColors['background']!,
       body: Stack(
         children: [
           // Top bar

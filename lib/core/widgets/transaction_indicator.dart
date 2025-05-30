@@ -20,23 +20,26 @@ class TransactionIndicator extends StatelessWidget {
       onTap: showTransactionDetail,
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             "23:00",
-            style: TextStyle(color: Color(itemColor), fontSize: 12),
+            style: TextStyle(fontSize: 12),
           ),
-          Icon(
-            CupertinoIcons.arrowtriangle_right_fill,
-            size: 12,
-            color: Color(itemColor),
-            shadows: [
-              Shadow(
-                offset: Offset(1, 2),
-                blurRadius: 2,
-                color: Colors.black.withOpacity(0.5),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(left: 2.0),
+            child: Icon(
+              CupertinoIcons.arrowtriangle_right_fill,
+              size: 16,
+              color: Color(itemColor),
+              shadows: [
+                Shadow(
+                  offset: Offset(1, 2),
+                  blurRadius: 2,
+                  color: Colors.black.withOpacity(0.5),
+                ),
+              ],
+            ),
           ),
         ],
       ),
