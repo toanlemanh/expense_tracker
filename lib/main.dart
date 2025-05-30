@@ -40,10 +40,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Expense Tracker',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: appColors['background']!),
         fontFamily: 'JetBrainsMono',
-        
       ),
       routerConfig:
           routerConfigurations, // router này ánh xạ sang route_configuration
@@ -65,7 +65,6 @@ class MainScaffold extends StatefulWidget {
 
 class _MainScaffoldState extends State<MainScaffold>
     with SingleTickerProviderStateMixin {
-
   int _getIndex(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
     if (location.startsWith(AppRoutes.home.path)) {
@@ -109,10 +108,10 @@ class _MainScaffoldState extends State<MainScaffold>
             child: _buildTopBar(),
           ),
 
+          // Page content
           PageView(
             scrollDirection: Axis.horizontal,
             onPageChanged: (int page) {
-              // keo sang thi kich hoat bottom nav bar
               _onTap(context, page);
             },
             controller: pageController,
@@ -121,21 +120,56 @@ class _MainScaffoldState extends State<MainScaffold>
               SingleScrollableSheet(child: ExpenseStatisticPage()),
               SingleScrollableSheet(child: ExpenseListPage()),
             ],
-            
           ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (index) {
-           pageController.jumpToPage(index);
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.wallet), label: 'Wallet'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+
+          // Floating BottomNavigationBar
+          Positioned(
+            left: 16,
+            right: 16,
+            bottom: 16,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                    color: appColors['pannel']!,
+                    blurRadius: 10,
+                    offset: Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: BottomNavigationBar(
+                  currentIndex: currentIndex,
+                  onTap: (index) {
+                    pageController.jumpToPage(index);
+                  },
+                  backgroundColor: Colors.white,
+                  selectedItemColor: Colors.blue,
+                  unselectedItemColor: Colors.grey,
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: Image.asset(
+                        'assets/icons/image.png',
+                        width: 24,
+                        height: 24,
+                      ),
+                      label: 'Home',
+                    ),
+                    const BottomNavigationBarItem(
+                      icon: Icon(Icons.wallet),
+                      label: 'Wallet',
+                    ),
+                    const BottomNavigationBarItem(
+                      icon: Icon(Icons.settings),
+                      label: 'Settings',
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -157,15 +191,3 @@ class _MainScaffoldState extends State<MainScaffold>
     );
   }
 }
-
-
-      // body: child,
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: currentIndex,
-      //   onTap: (index) => _onTap(context, index),
-      //   items: const [
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-      //     BottomNavigationBarItem(icon: Icon(Icons.wallet), label: 'Wallet'),
-      //     BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
-      //   ],
-      // ),
