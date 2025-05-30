@@ -24,11 +24,11 @@ class TransactionIndicator extends StatelessWidget {
         children: [
           Text(
             "23:00",
-            style: TextStyle(color: Color(itemColor), fontSize: 16),
+            style: TextStyle(color: Color(itemColor), fontSize: 12),
           ),
           Icon(
             CupertinoIcons.arrowtriangle_right_fill,
-            size: 16,
+            size: 12,
             color: Color(itemColor),
             shadows: [
               Shadow(

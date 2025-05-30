@@ -41,6 +41,8 @@ class MyApp extends StatelessWidget {
       title: 'Expense Tracker',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        fontFamily: 'JetBrainsMono',
+        
       ),
       routerConfig:
           routerConfigurations, // router này ánh xạ sang route_configuration
@@ -146,7 +148,7 @@ class _MainScaffoldState extends State<MainScaffold>
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: const [
-            Chip(label: Text("Default ledger")),
+            Chip(label: Text("Default ledger", style: TextStyle(fontSize: 16))),
             Chip(label: Text("Setup Budget")),
           ],
         ),

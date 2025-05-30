@@ -42,21 +42,28 @@ class ExpenseListPage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Text("May 27"),
-                  SizedBox(width: 8),
-                  Container(
-                    padding: EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      color: Colors.black12,
-                      borderRadius: BorderRadius.circular(12),
+              Expanded(
+                child: Row(
+                //  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("May 27"),
+                    SizedBox(width: 10),
+                    Container(
+                      padding: EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text('Tue'),
                     ),
-                    child: Text('Tue'),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              Row(children: [Text('+0'), Text('-250000')]),
+              Expanded(
+                child: Row(
+                 mainAxisAlignment: MainAxisAlignment.end,
+                  children: [Text('+0'), SizedBox(width: 10), Text('-250000')]),
+              ),
             ],
           ),
         ),
