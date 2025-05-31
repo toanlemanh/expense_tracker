@@ -30,7 +30,7 @@ class IncomeIndicator extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
-                  color: appColors['fuzzyWuzzyBrown'],
+                  color: appColors['astrograniteDebris'],
                 ),
                 children: [
                   TextSpan(
