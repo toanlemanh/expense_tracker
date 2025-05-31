@@ -127,7 +127,8 @@ dev_dependencies:
 flutter:
   assets:
       - assets/db/init_new.sql
-      - assets/icons/categories/
+      - assets/icons/categories/svg/
+      - assets/icons/categories/png/
       # - assets/images/default.png
 
   # The following line ensures that the Material Icons font is
