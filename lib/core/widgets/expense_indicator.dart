@@ -18,7 +18,7 @@ class ExpenseIndicator extends StatelessWidget {
                 style: TextStyle(fontSize: 20, color: appColors['astrograniteDebris'], fontWeight: FontWeight.w500),
                 children: [
                   WidgetSpan(
-                    child: Icon(Icons.keyboard_double_arrow_down_outlined, size: 20, fill: 1.0, color: appColors['fuzzyWuzzyBrown']),
+                    child: Icon(Icons.keyboard_double_arrow_up_outlined, size: 20, fill: 1.0, color: appColors['fuzzyWuzzyBrown']),
                   ),
                 ],
               ),

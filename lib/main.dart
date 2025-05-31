@@ -189,19 +189,17 @@ class _MainScaffoldState extends State<MainScaffold>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  child: TextButton(
+                    child: Text(
+                      "Default ledger",
+                      style: TextStyle(fontSize: 16),
                     ),
-                    child: TextButton(
-                      child: Text(
-                        "Default ledger",
-                        style: TextStyle(fontSize: 16),
-                      ),
 
-                      onPressed: () {},
-                    ),
+                    onPressed: () {},
                   ),
                 ),
                 Container(
@@ -236,7 +234,7 @@ class _MainScaffoldState extends State<MainScaffold>
                     children: [
                       //Section cho Expense
                       ExpenseIndicator(),
-                      const SizedBox(width: 50),
+                      const SizedBox(width: 10),
                       //Section cho Income
                       IncomeIndicator(),
                     ],

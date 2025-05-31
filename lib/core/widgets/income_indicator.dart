@@ -15,10 +15,10 @@ class IncomeIndicator extends StatelessWidget {
             RichText(
               text: TextSpan(
                 text: 'May Income',
-                style: TextStyle(fontSize: 20, color: appColors['astrograniteDebris']),
+                style: TextStyle(fontSize: 20, color: appColors['astrograniteDebris'], fontWeight: FontWeight.w500),
                 children: [
                   WidgetSpan(
-                    child: Icon(Icons.arrow_downward, size: 18, color: appColors['fuzzyWuzzyBrown']),
+                    child: Icon(Icons.keyboard_double_arrow_down_outlined, size: 20, fill: 1.0, color: appColors['fuzzyWuzzyBrown']),
                   ),
                 ],
               ),
@@ -30,11 +30,11 @@ class IncomeIndicator extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
-                  color: appColors['astrograniteDebris'],
+                  color: appColors['fuzzyWuzzyBrown'],
                 ),
                 children: [
                   TextSpan(
-                    text: 'VND',
+                    text: ' VND',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.normal,
