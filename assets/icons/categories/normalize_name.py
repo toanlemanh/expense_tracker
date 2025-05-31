@@ -17,3 +17,15 @@ for old_filename in svg_files:
         except FileExistsError:
             new_path = os.path.join(parent_dir, f"{parts[1]}_1.svg")
             os.rename(old_path, new_path)
+
+svg_files = [f for f in os.listdir(parent_dir) if f.endswith('.svg')]
+
+for filename in svg_files:
+    old_filename = filename
+    new_filename = filename.replace('.svg', '')
+    new_filename = f"{new_filename}.svg"
+    print(f"Renaming {old_filename} \n      to {new_filename} \n\n")
+    old_path = os.path.join(parent_dir, old_filename)
+    new_path = os.path.join(parent_dir, new_filename)
+    os.rename(old_path, new_path)
+    
