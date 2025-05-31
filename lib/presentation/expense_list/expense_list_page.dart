@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:expense_tracker/core/widgets/transaction_record.dart';
 import 'package:flutter/material.dart';
 
@@ -44,14 +45,20 @@ class ExpenseListPage extends StatelessWidget {
             children: [
               Expanded(
                 child: Row(
-                //  mainAxisAlignment: MainAxisAlignment.center,
+                  //  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("May 27"),
+                    Text(
+                      "May 27",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     SizedBox(width: 10),
                     Container(
                       padding: EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
-                        color: Colors.black12,
+                        color: appColors['background'],
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text('Tue'),
@@ -61,8 +68,30 @@ class ExpenseListPage extends StatelessWidget {
               ),
               Expanded(
                 child: Row(
-                 mainAxisAlignment: MainAxisAlignment.end,
-                  children: [Text('+0'), SizedBox(width: 10), Text('-250000')]),
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'JetBrainsMono',
+                          fontWeight: FontWeight.bold,
+                          color: appColors['astrograniteDebris'],
+                        ),
+                        children: [
+                          TextSpan(text: '+0'),
+                          WidgetSpan(child: SizedBox(width: 10)),
+                          TextSpan(
+                            text: '-250000',
+                            style: TextStyle(
+                              color: appColors['fuzzyWuzzyBrown'],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

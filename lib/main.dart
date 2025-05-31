@@ -1,13 +1,16 @@
+
 import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:expense_tracker/core/data/local/sqflite/sqflite_client.dart';
 import 'package:expense_tracker/core/data/network/dio_client.dart';
 import 'package:expense_tracker/core/routing/app_routes.dart';
+import 'package:expense_tracker/core/widgets/bottom_navy_bar.dart';
 import 'package:expense_tracker/core/widgets/expense_indicator.dart';
 import 'package:expense_tracker/core/widgets/income_indicator.dart';
 import 'package:expense_tracker/features/asset/service/asset_service.dart';
 import 'package:expense_tracker/features/asset/viewmodel/asset_store.dart';
 import 'package:expense_tracker/presentation/expense_list/expense_list_page.dart';
 import 'package:expense_tracker/presentation/layout/single_scrollable_sheet.dart';
+import 'package:expense_tracker/presentation/main_indicator_section/main_indicator_section.dart';
 import 'package:expense_tracker/presentation/statistic/money_statistic_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -27,7 +30,7 @@ void main() async {
       providers: [
         Provider<AssetStore>(
           create: (_) => AssetStore(assetService),
-          lazy: false, // comment cái này để disable lazy loading
+          //lazy: false, // comment cái này để disable lazy loading
         ),
       ],
       child: const MyApp(),
@@ -67,35 +70,49 @@ class MainScaffold extends StatefulWidget {
 
 class _MainScaffoldState extends State<MainScaffold>
     with SingleTickerProviderStateMixin {
-  int _getIndex(BuildContext context) {
-    final location = GoRouterState.of(context).uri.toString();
-    if (location.startsWith(AppRoutes.home.path)) {
-      return 0;
-    } else if (location.startsWith(AppRoutes.wallet.path)) {
-      return 1;
-    } else if (location.startsWith(AppRoutes.setting.path)) {
-      return 2;
-    }
-    return 0;
-  }
+  int _currentIndex = 0;
+  late PageController pageController;
 
-  void _onTap(BuildContext context, int index) {
-    final destinations = [
-      AppRoutes.home.path,
-      AppRoutes.wallet.path,
-      AppRoutes.setting.path,
-    ];
-
-    // điều hướng sang các trang khác nhờ vào index
-    print('điều hướng sang các trang khác nhờ vào index');
-    context.go(destinations[index]);
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController();
   }
 
   @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  // int _getIndex(BuildContext context) {
+  //   final location = GoRouterState.of(context).uri.toString();
+  //   if (location.startsWith(AppRoutes.home.path)) {
+  //     return 0;
+  //   } else if (location.startsWith(AppRoutes.wallet.path)) {
+  //     return 1;
+  //   } else if (location.startsWith(AppRoutes.setting.path)) {
+  //     return 2;
+  //   }
+  //   return 0;
+  // }
+
+  // void _onTap(BuildContext context, int index) {
+  //   final destinations = [
+  //     AppRoutes.home.path,
+  //     AppRoutes.wallet.path,
+  //     AppRoutes.setting.path,
+  //   ];
+
+  //   // điều hướng sang các trang khác nhờ vào index
+  //   print('điều hướng sang các trang khác nhờ vào index');
+  //   context.go(destinations[index]);
+  // }
+
+  @override
   Widget build(BuildContext context) {
-    final currentIndex = _getIndex(context);
+    // final currentIndex = _getIndex(context);
     final screenHeight = MediaQuery.of(context).size.height;
-    final pageController = PageController();
 
     return Scaffold(
       backgroundColor: appColors['background']!,
@@ -106,31 +123,29 @@ class _MainScaffoldState extends State<MainScaffold>
             top: 0,
             left: 0,
             right: 0,
-            height: screenHeight * 0.32,
+            height: screenHeight * 0.3,
             child: _buildTopBar(),
           ),
-          //_buildTopBar(),
-
           // Page content
           PageView(
+            controller: pageController,
             scrollDirection: Axis.horizontal,
             onPageChanged: (int page) {
-              _onTap(context, page);
+              setState(() => _currentIndex = page);
             },
-            controller: pageController,
             children: [
               SingleScrollableSheet(child: ExpenseListPage()),
               SingleScrollableSheet(child: ExpenseStatisticPage()),
               SingleScrollableSheet(child: ExpenseListPage()),
             ],
           ),
-
           // Floating BottomNavigationBar
           Positioned(
             left: 16,
             right: 16,
             bottom: 16,
             child: Container(
+              padding: EdgeInsets.all(0),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(30),
@@ -142,35 +157,41 @@ class _MainScaffoldState extends State<MainScaffold>
                   ),
                 ],
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: BottomNavigationBar(
-                  currentIndex: currentIndex,
-                  onTap: (index) {
-                    pageController.jumpToPage(index);
-                  },
-                  backgroundColor: Colors.white,
-                  selectedItemColor: Colors.blue,
-                  unselectedItemColor: Colors.grey,
-                  items: [
-                    BottomNavigationBarItem(
-                      icon: Image.asset(
-                        'assets/icons/image.png',
-                        width: 24,
-                        height: 24,
-                      ),
-                      label: 'Home',
+              child: BottomNavyBar(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+
+                // itemPadding: EdgeInsets.zero,
+                selectedIndex: _currentIndex,
+                onItemSelected: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                    // pageController.jumpToPage(index);
+                    pageController.animateToPage(
+                      index,
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.ease,
+                    );
+                  });
+                },
+                // containerHeight: 20,
+                items: <BottomNavyBarItem>[
+                  BottomNavyBarItem(
+                    icon: Image.asset(
+                      'assets/icons/image.png',
+                      width: 24,
+                      height: 24,
                     ),
-                    const BottomNavigationBarItem(
-                      icon: Icon(Icons.wallet),
-                      label: 'Wallet',
-                    ),
-                    const BottomNavigationBarItem(
-                      icon: Icon(Icons.settings),
-                      label: 'Settings',
-                    ),
-                  ],
-                ),
+                    title: Center(child: Text('Home')),
+                  ),
+                  BottomNavyBarItem(
+                    icon: Icon(Icons.wallet),
+                    title: Center(child: Text('Wallet')),
+                  ),
+                  BottomNavyBarItem(
+                    icon: Icon(Icons.settings),
+                    title: Center(child: Text('Settings')),
+                  ),
+                ],
               ),
             ),
           ),
@@ -184,7 +205,7 @@ class _MainScaffoldState extends State<MainScaffold>
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -215,34 +236,7 @@ class _MainScaffoldState extends State<MainScaffold>
               ],
             ),
           ),
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Positioned(
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: Image.asset(
-                    'assets/icons/tungtungtungsahur.png',
-                    width: 135, // control size to avoid cropping
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      //Section cho Expense
-                      ExpenseIndicator(),
-                      const SizedBox(width: 10),
-                      //Section cho Income
-                      IncomeIndicator(),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
+          MainIndicatorSection(),
         ],
       ),
     );
