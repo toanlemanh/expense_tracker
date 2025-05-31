@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,31 +19,31 @@ class TransactionIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: showTransactionDetail,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        // mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "23:00",
-            style: TextStyle(fontSize: 12),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 2.0),
+      child: 
+      Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: Center(
+          child: RichText(
+            text: TextSpan(
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: appColors['astrograniteDebris']),
+              children: [
+          TextSpan(text: '23:00'),
+          WidgetSpan(
+            alignment: PlaceholderAlignment.middle,
             child: Icon(
-              CupertinoIcons.arrowtriangle_right_fill,
-              size: 16,
-              color: Color(itemColor),
-              shadows: [
-                Shadow(
-                  offset: Offset(1, 2),
-                  blurRadius: 2,
-                  color: Colors.black.withOpacity(0.5),
-                ),
+              Icons.arrow_right_rounded,
+              size: 30,
+              color: appColors['fuzzyWuzzyBrown'],
+            ),
+          ),
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      )
+
+
+
     );
   }
 }

@@ -2,6 +2,8 @@ import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:expense_tracker/core/data/local/sqflite/sqflite_client.dart';
 import 'package:expense_tracker/core/data/network/dio_client.dart';
 import 'package:expense_tracker/core/routing/app_routes.dart';
+import 'package:expense_tracker/core/widgets/expense_indicator.dart';
+import 'package:expense_tracker/core/widgets/income_indicator.dart';
 import 'package:expense_tracker/features/asset/service/asset_service.dart';
 import 'package:expense_tracker/features/asset/viewmodel/asset_store.dart';
 import 'package:expense_tracker/presentation/expense_list/expense_list_page.dart';
@@ -185,11 +187,33 @@ class _MainScaffoldState extends State<MainScaffold>
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Chip(
-                  label: Text("Default ledger", style: TextStyle(fontSize: 16)),
+              children: [
+                Container(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: TextButton(
+                      child: Text(
+                        "Default ledger",
+                        style: TextStyle(fontSize: 16),
+                      ),
+
+                      onPressed: () {},
+                    ),
+                  ),
                 ),
-                Chip(label: Text("Setup Budget")),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  child: TextButton(
+                    child: Text("Setup Budget", style: TextStyle(fontSize: 16)),
+                    onPressed: () {},
+                  ),
+                ),
               ],
             ),
           ),
@@ -211,104 +235,10 @@ class _MainScaffoldState extends State<MainScaffold>
                   Row(
                     children: [
                       //Section cho Expense
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Container(
-                          color: Colors.red,
-                          child: Column(
-                            children: [
-                              RichText(
-                                text: TextSpan(
-                                  text: 'May Expense',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                  ),
-                                  children: [
-                                    WidgetSpan(
-                                      child: Icon(
-                                        Icons.info,
-                                        size: 18,
-                                        color: Colors.blue,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              RichText(
-                                text: TextSpan(
-                                  text: '0',
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                  children: [
-                                    TextSpan(
-                                      text: ' VND',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      ExpenseIndicator(),
                       const SizedBox(width: 50),
                       //Section cho Income
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Container(
-                          color: Colors.red,
-                          child: Column(
-                            children: [
-                              RichText(
-                                text: TextSpan(
-                                  text: 'May Expense',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                  ),
-                                  children: [
-                                    WidgetSpan(
-                                      child: Icon(
-                                        Icons.info,
-                                        size: 18,
-                                        color: Colors.blue,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              RichText(
-                                text: TextSpan(
-                                  text: '0',
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                  children: [
-                                    TextSpan(
-                                      text: ' VND',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      IncomeIndicator(),
                     ],
                   ),
                 ],

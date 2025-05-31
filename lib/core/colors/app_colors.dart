@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 const appColors = {
+  'astrograniteDebris': Color(0xff3b424c),
   'fuzzyWuzzyBrown':  Color(0xffc25663),
   'background':  Color(0xFFf8e9d4),
   'pannel':  Color(0xFFfbf2e1),

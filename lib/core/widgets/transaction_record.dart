@@ -2,43 +2,47 @@ import 'package:expense_tracker/core/widgets/transaction_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
-var indicatorId = 0; // Biến toàn cục để xác định có hiển thị indicator hay không
+var indicatorId =
+    0; // Biến toàn cục để xác định có hiển thị indicator hay không
 
 class TransactionRecord extends StatelessWidget {
   final String title;
   final int itemColor;
   const TransactionRecord({
     required this.title,
-    required this.itemColor, 
-    super.key, 
-  }); 
+    required this.itemColor,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     indicatorId++; // Tăng biến toàn cục mỗi khi tạo một TransactionRecord mới
     return TimelineTile(
-  lineXY: 0.05,
-  alignment: TimelineAlign.manual,
-  isFirst: false,
-  hasIndicator: true,
-  indicatorStyle: IndicatorStyle(
-    width: 60,
-    height: 30,
-    padding: const EdgeInsets.symmetric(horizontal: 8),
-    drawGap: indicatorId % 2 == 0,
-    indicator: indicatorId % 2 == 0
-        ? TransactionIndicator(itemColor: itemColor, itemTitle: title)
-        : const SizedBox(width: 60, height: 30), // 👈 Placeholder to keep layout
-  ),
-  beforeLineStyle: LineStyle(color: Color(itemColor)),
-  endChild: buildTransactionTile(context),
-);
-
+      lineXY: 0.05,
+      alignment: TimelineAlign.manual,
+      isFirst: false,
+      hasIndicator: true,
+      indicatorStyle: IndicatorStyle(
+        width: 80,
+        height: 40,
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        drawGap: indicatorId % 2 == 0,
+        indicator:
+           indicatorId % 2 == 0
+                ? TransactionIndicator(itemColor: itemColor, itemTitle: title)
+                : const SizedBox(
+                  width: 60,
+                  height: 30,
+                ), // 👈 Placeholder to keep layout
+      ),
+      beforeLineStyle: LineStyle(color: Color(itemColor)),
+      endChild: buildTransactionTile(context),
+    );
   }
 
   Widget buildTransactionTile(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(right: 16.0, top: 8.0, bottom: 8.0),
       child: Container(
         decoration: BoxDecoration(
           color: Color(itemColor), // sử dụng itemColor
