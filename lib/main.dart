@@ -1,4 +1,3 @@
-
 import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:expense_tracker/core/data/local/sqflite/sqflite_client.dart';
 import 'package:expense_tracker/core/data/network/dio_client.dart';
@@ -159,8 +158,7 @@ class _MainScaffoldState extends State<MainScaffold>
               ),
               child: BottomNavyBar(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
-
-                // itemPadding: EdgeInsets.zero,
+                backgroundColor: appColors['pannel'],
                 selectedIndex: _currentIndex,
                 onItemSelected: (index) {
                   setState(() {
@@ -176,6 +174,11 @@ class _MainScaffoldState extends State<MainScaffold>
                 // containerHeight: 20,
                 items: <BottomNavyBarItem>[
                   BottomNavyBarItem(
+                    activeColor: appColors['astrograniteDebris']!,
+                    inactiveColor: appColors['background'],
+                    activeTextColor: appColors['astrograniteDebris'], //fallback color
+                    //laays mau trung tinh
+                    activeBackgroundColor: appColors['fuzzyWuzzyBrown']!,
                     icon: Image.asset(
                       'assets/icons/image.png',
                       width: 24,

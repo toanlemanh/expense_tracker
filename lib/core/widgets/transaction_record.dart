@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:expense_tracker/core/widgets/transaction_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
@@ -28,12 +29,9 @@ class TransactionRecord extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8),
         drawGap: indicatorId % 2 == 0,
         indicator:
-           indicatorId % 2 == 0
+            indicatorId % 2 == 0
                 ? TransactionIndicator(itemColor: itemColor, itemTitle: title)
-                : const SizedBox(
-                  width: 60,
-                  height: 30,
-                ), // 👈 Placeholder to keep layout
+                : const SizedBox(), //keep layout
       ),
       beforeLineStyle: LineStyle(color: Color(itemColor)),
       endChild: buildTransactionTile(context),
@@ -52,21 +50,35 @@ class TransactionRecord extends StatelessWidget {
           // tileColor: Color(0xFFC7E9E8),
           contentPadding: EdgeInsets.only(left: 8, right: 20),
           dense: true, // giảm khoảng cách giữa các dòng
-          title: Row(
-            children: [
-              Text(title),
-              const Icon(Icons.food_bank),
-              const Icon(Icons.gamepad),
-            ],
-          ),
+            title: RichText(
+            text: TextSpan(
+              style: TextStyle(
+                color: appColors['astrograniteDebris'],
+                fontSize: 18,
+              ),
+              children: [
+              TextSpan(text: title),
+              WidgetSpan(
+                child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                child: Icon(Icons.food_bank, size: 18),
+                ),
+              ),
+              WidgetSpan(
+                child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                child: Icon(Icons.gamepad, size: 18),
+                ),
+              ),
+              ],
+            ),
+            ),
           subtitle: const Text('23:05'),
           leading: SizedBox(
             width: 50,
             height: 50,
 
             child: Container(
-              // padding: EdgeInsets.all(2.0),
-              // color: Colors.black.withOpacity(0.5),
               decoration:
               // foregroundDecoration:
               BoxDecoration(
@@ -79,7 +91,7 @@ class TransactionRecord extends StatelessWidget {
           trailing: Text(
             '-12000',
             style: TextStyle(
-              color: Color.fromARGB(255, 255, 90, 7),
+              color: appColors['fuzzyWuzzyBrown'],
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
