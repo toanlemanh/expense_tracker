@@ -128,6 +128,8 @@ dev_dependencies:
 flutter:
   assets:
       - assets/db/init_new.sql
+      - assets/icons/categories/svg/
+      - assets/icons/categories/png/
       - assets/icons/
   fonts:
     - family: JetBrainsMono
