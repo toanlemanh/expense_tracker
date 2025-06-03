@@ -73,6 +73,73 @@ class _ScrollablePageState extends State<ScrollablePage>
               ),
             ],
           ),
+          // List cac option menu bao gom: ledger, category, bookmarks
+          //
+          //=> la cac nut bam dua den trang detail
+          // moi trang detail la mot page co layout don
+          //gian gom appbar, list va floating button
+          // @TODO: lam cac nut bam (Thanh dang lam do)
+          // lam tam cac nut bam co the chuyen sang trang khac (dung go router)
+          // configure sau nay co the them vao mot muc moi de dang (Toan)
+          // Lam 1 trang detail sample, moi ledger co mot type => truyen url 1 type
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () => print('clickme Default ledger'),
+                      child: const Center(child: Text('Ledger')),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () => print('clickme Category'),
+                      child: const Center(child: Text('Category')),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () => print('clickme Bookmarks'),
+                      child: const Center(child: Text('Bookmarks')),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () => print('clickme Bookmarks'),
+                      child: const Center(child: Text('Bookmarks')),
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
           // Transaction list trong này
           // Transaction nhận 2 biến pagekey (theo idex) và scrollController của DraggableScrollableSheet
@@ -80,10 +147,10 @@ class _ScrollablePageState extends State<ScrollablePage>
             child: PrimaryScrollController(
               controller: widget.scrollController,
               child: Container(
-                    // color: appColors['pannel'],
-                    //typical TransactionRecord(title: items[index], itemColor: colors[index])
-                    child: widget.child,
-                  )
+                // color: appColors['pannel'],
+                //typical TransactionRecord(title: items[index], itemColor: colors[index])
+                child: widget.child,
+              ),
               //  widget.child,
             ),
           ),
