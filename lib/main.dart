@@ -137,11 +137,17 @@ class _MainScaffoldState extends State<MainScaffold>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5.0),
+            
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: appColors['astrograniteDebris'],
+                  foregroundColor: Colors.white,
+                  textStyle: TextStyle(fontSize: 16),
                 ),
+                onPressed: () {
+                  print("press me");
+                },
+                child: Text("Default ledger"),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
