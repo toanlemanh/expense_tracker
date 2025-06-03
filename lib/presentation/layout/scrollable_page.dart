@@ -1,7 +1,9 @@
 import 'package:expense_tracker/core/colors/app_colors.dart';
+import 'package:expense_tracker/core/routing/app_routes.dart';
 import 'package:expense_tracker/core/widgets/transaction_record.dart';
 import 'package:expense_tracker/main.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ScrollablePage extends StatefulWidget {
   late final ScrollController scrollController;
@@ -94,7 +96,7 @@ class _ScrollablePageState extends State<ScrollablePage>
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () => print('clickme Default ledger'),
+                      onPressed: () => context.go(AppRoutes.details.path),
                       child: const Center(child: Text('Ledger')),
                     ),
                   ),
@@ -107,7 +109,7 @@ class _ScrollablePageState extends State<ScrollablePage>
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () => print('clickme Category'),
+                      onPressed: () => context.go(AppRoutes.category.path),
                       child: const Center(child: Text('Category')),
                     ),
                   ),
