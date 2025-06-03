@@ -74,7 +74,7 @@ void main() async {
       providers: [
         Provider<AssetStore>(
           create: (_) => AssetStore(assetService),
-          lazy: true, // comment cái này để disable lazy loading
+          lazy: false, // comment cái này để disable lazy loading
         ),
       ],
       child: const MyApp(),
@@ -105,8 +105,8 @@ class MyApp extends StatelessWidget {
 class MainScaffold extends StatefulWidget {
   // hàm này dùng để lấy index của 1 screen dựa vào đường dẫn hiện tại
 
-  final Widget child;
-  const MainScaffold({required this.child, super.key});
+  //final Widget child;
+  const MainScaffold({super.key});
 
   @override
   State<MainScaffold> createState() => _MainScaffoldState();
@@ -137,7 +137,6 @@ class _MainScaffoldState extends State<MainScaffold>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-            
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: appColors['astrograniteDebris'],
