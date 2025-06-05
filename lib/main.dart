@@ -8,6 +8,8 @@ import 'package:expense_tracker/core/widgets/income_indicator.dart';
 import 'package:expense_tracker/core/widgets/transaction_record.dart';
 import 'package:expense_tracker/features/asset/service/asset_service.dart';
 import 'package:expense_tracker/features/asset/viewmodel/asset_store.dart';
+import 'package:expense_tracker/features/record/service/record_service.dart';
+import 'package:expense_tracker/features/record/viewmodel/record_store.dart';
 import 'package:expense_tracker/presentation/expense_list/expense_list_page.dart';
 import 'package:expense_tracker/presentation/layout/single_scrollable_sheet.dart';
 import 'package:expense_tracker/presentation/main_indicator_section/main_indicator_section.dart';
@@ -63,10 +65,16 @@ final colors = [
 ];
 
 void main() async {
+  final dioClient = DioClient();
+  final sqfliteClient = SqfliteClient();
   //init service
   late final assetService = AssetService(
-    dioClient: DioClient(),
-    sqfliteClient: SqfliteClient(),
+    dioClient: dioClient,
+    sqfliteClient: sqfliteClient,
+  );
+  late final recordService = RecordService(
+    dioClient: dioClient,
+    sqfliteClient: sqfliteClient,
   );
 
   runApp(
@@ -74,7 +82,11 @@ void main() async {
       providers: [
         Provider<AssetStore>(
           create: (_) => AssetStore(assetService),
-          lazy: false, // comment cái này để disable lazy loading
+          // lazy: false, // comment cái này để disable lazy loading
+        ),
+         Provider<RecordStore>(
+          create: (_) => RecordStore(recordService),
+          // lazy: false, // comment cái này để disable lazy loading
         ),
       ],
       child: const MyApp(),
