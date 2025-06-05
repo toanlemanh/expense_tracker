@@ -6,7 +6,12 @@ extension DateTimeFormat on DateTime{
 
   String getDateLabel() {
     //returns hour in 'May 28' format
-    return '$month $day';
+    const months = [
+    '', // index 0 unused
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+    return '${months[month]} $day';
   }
 
     String getWeekDayLabel() {
