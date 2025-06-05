@@ -87,6 +87,7 @@ dev_dependencies:
   #B
   build_runner: ^2.4.6
   #C
+  crypto: ^3.0.6
   #D
   #E
   #F
@@ -101,9 +102,11 @@ dev_dependencies:
   #N
   #O
   #P
+  palette_generator: ^0.3.3
   #Q
   #R
   #S
+  shared_preferences: ^2.5.3
   #T
   #U
   #V

@@ -4,8 +4,10 @@ import 'package:expense_tracker/core/routing/app_routes.dart';
 import 'package:expense_tracker/features/asset/service/asset_service.dart';
 import 'package:expense_tracker/features/asset/viewmodel/asset_store.dart';
 import 'package:expense_tracker/presentation/expense_list/expense_list_page.dart';
+import 'package:expense_tracker/presentation/temp_demo_widget/demo_widget_page.dart';
 import 'package:expense_tracker/presentation/layout/single_scrollable_sheet.dart';
 import 'package:expense_tracker/presentation/statistic/money_statistic_page.dart';
+import 'package:expense_tracker/data/sharedpref/shared_preference_color.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +15,8 @@ import 'package:provider/provider.dart';
 import 'core/routing/router_configuration.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await ImageColorStore().init(); // Khởi tạo màu ảnh 
   //init service
   late final assetService = AssetService(
     dioClient: DioClient(),
@@ -116,7 +120,7 @@ class _MainScaffoldState extends State<MainScaffold>
             children: [
               SingleScrollableSheet(child: ExpenseListPage()),
               SingleScrollableSheet(child: ExpenseStatisticPage()),
-              SingleScrollableSheet(child: ExpenseListPage()),
+              SingleScrollableSheet(child: DemoWidgetPage()),
             ],
             
           ),
