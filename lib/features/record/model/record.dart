@@ -53,3 +53,17 @@ class Record {
     };
   }
 }
+
+final class RecordDto {
+  late final Record _record;
+  final bool _isFirstDateItem;
+  final bool _isFirstHourItem;
+
+  RecordDto({
+    required Record record,
+    bool isFirstDateItem = false,
+    bool isFirstHourItem = false,
+  }) : _record = record,
+       _isFirstDateItem = isFirstDateItem,
+       _isFirstHourItem = isFirstHourItem;
+}
