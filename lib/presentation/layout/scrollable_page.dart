@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 class ScrollablePage extends StatefulWidget {
   late final ScrollController scrollController;
+  //typical transaction list
   late final Widget child;
 
   ScrollablePage({
