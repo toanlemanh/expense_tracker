@@ -96,7 +96,7 @@ class _ScrollablePageState extends State<ScrollablePage>
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () => context.go(AppRoutes.details.path),
+                      onPressed: () => context.go(AppRoutes.ledgers.path),
                       child: const Center(child: Text('Ledger')),
                     ),
                   ),
