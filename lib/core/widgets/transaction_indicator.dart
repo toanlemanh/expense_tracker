@@ -27,7 +27,7 @@ class TransactionIndicator extends StatelessWidget {
             text: TextSpan(
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: appColors['astrograniteDebris']),
               children: [
-          TextSpan(text: '23:00'),
+          TextSpan(text:'${DateTime.now().hour}:00'),
           WidgetSpan(
             alignment: PlaceholderAlignment.middle,
             child: Icon(
