@@ -77,19 +77,22 @@ class ImageColorStore {
     return Color(colorInt);
   }
 
-  /// Returns a slightly lighter version of the average color.
-  Color getAveriColorLighter(String filePath, [double amount = 0.15]) {
+  Color getAveriColorLighter1(String filePath, [double amount = 0.18]) {
     final baseColor = getAveriColor(filePath);
     return _lightenColor(baseColor, amount);
   }
 
-  /// Returns a much lighter version of the average color.
-  Color getAveriColorLighterLighter(String filePath, [double amount = 0.30]) {
+  Color getAveriColorLighter2(String filePath, [double amount = 0.32]) {
     final baseColor = getAveriColor(filePath);
     return _lightenColor(baseColor, amount);
   }
 
-  /// Helper to lighten a color by a given amount (0.0 - 1.0)
+
+  Color getAveriColorLightest(String filePath, [double amount = 0.48]) {
+    final baseColor = getAveriColor(filePath);
+    return _lightenColor(baseColor, amount);
+  }
+
   Color _lightenColor(Color color, double amount) {
     assert(amount >= 0.0 && amount <= 1.0);
     final hsl = HSLColor.fromColor(color);

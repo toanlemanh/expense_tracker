@@ -1,65 +1,51 @@
+import 'package:expense_tracker/core/widgets/common/card_image.dart';
+import 'package:expense_tracker/data/sharedpref/shared_preference_color.dart';
 import 'package:flutter/material.dart';
 
-
-// TODO: Not done, finish
 class ButtonCardText extends StatelessWidget {
-  final String title;
+  final Text buttonText;
   final String imagePath;
   final VoidCallback? onTap;
+  final Size? size;
 
   const ButtonCardText({
     super.key,
-    required this.title,
+    required this.buttonText,
     required this.imagePath,
     this.onTap,
+    this.size,
   });
 
   @override
   Widget build(BuildContext context) {
+    final backgroundColor = ImageColorStore().getAveriColorLightest(imagePath);
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: size?.width,
+        height: size?.height,
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         decoration: BoxDecoration(
-          color: const Color(0xFFFFE8C6), // light peachy background
-          borderRadius: BorderRadius.circular(16),
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(24),
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: size == null ? MainAxisSize.min : MainAxisSize.max,
           children: [
             // Icon/Image
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: const Color.fromARGB(255, 14, 11, 11).withOpacity(0.3),
-              ),
-              child: Image.asset(
-                imagePath,
-                width: 48,
-                height: 48,
-              ),
+            CardImageSquare(
+              imagePath: imagePath,
+              autoBackground: true,
+              onTap: onTap,
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 8),
             // Text
             Column(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title.split(' ').first,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: Colors.black87,
-                  ),
-                ),
-                Text(
-                  title.split(' ').length > 1 ? title.split(' ').last : '',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.black87,
-                  ),
-                ),
+                buttonText
               ],
             ),
           ],
