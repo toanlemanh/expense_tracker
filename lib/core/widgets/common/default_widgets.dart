@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class DefaultWidget {
   // Default TextStyle
   static const TextStyle textStyle = TextStyle(
-    fontSize: 16,
+    fontSize: 12,
     color: Colors.black87,
     fontWeight: FontWeight.normal,
   );

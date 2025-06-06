@@ -194,23 +194,38 @@ class _MainScaffoldState extends State<MainScaffold>
                     minChildSize: 0.7, // Can shrink to 10%
                     //maxChildSize: 1.0, // Can expand to 100%
                     builder: (context, scrollController) {
-                      return PageView.builder(
+                        return PageView(
                         clipBehavior: Clip.none,
                         controller: pageController,
                         scrollDirection: Axis.horizontal,
                         onPageChanged: (index) {
                           setState(() => _currentIndex = index);
                         },
-                        itemCount: 3,
-                        itemBuilder:
-                            (context, index) => ScrollablePage(
-                              key: PageStorageKey('page$index'),
-                              scrollController: scrollController,
-                              child: TransactionList(
-                                scrollController: scrollController,
-                              ),
-                            ),
-                      );
+                        children: [
+                          ScrollablePage(
+                          key: PageStorageKey('page0'),
+                          scrollController: scrollController,
+                          child: TransactionList(
+                            scrollController: scrollController,
+                          ),
+                          ),
+                          ScrollablePage(
+                          key: PageStorageKey('page1'),
+                          scrollController: scrollController,
+                          child: Center(child: Text('Wallet Page')),
+                          ),
+                          ScrollablePage(
+                          key: PageStorageKey('page2'),
+                          scrollController: scrollController,
+                          child: Center(child: Text('Settings Page')),
+                          ),
+                          ScrollablePage(
+                          key: PageStorageKey('page3'),
+                          scrollController: scrollController,
+                          child: DemoWidgetPage(),
+                          ),
+                        ],
+                        );
                     },
                   ),
                   // Floating BottomNavigationBar
@@ -266,6 +281,10 @@ class _MainScaffoldState extends State<MainScaffold>
                           BottomNavyBarItem(
                             icon: Icon(Icons.settings),
                             title: Center(child: Text('Settings')),
+                          ),
+                          BottomNavyBarItem(
+                            icon: Icon(Icons.developer_mode),
+                            title: Center(child: Text('Widgets')),
                           ),
                         ],
                       ),
