@@ -1,12 +1,5 @@
-import 'package:expense_tracker/features/home/view/home_screen.dart';
-import 'package:expense_tracker/features/setting/view/setting_screen.dart';
-import 'package:expense_tracker/features/asset/view/wallet_screen.dart';
-import 'package:expense_tracker/presentation/expense_list/expense_list_page.dart';
-import 'package:expense_tracker/core/widgets/pop_up_page.dart';
 import 'package:expense_tracker/presentation/layout/category_page.dart';
 import 'package:expense_tracker/presentation/layout/ledger_page.dart';
-import 'package:expense_tracker/presentation/layout/single_scrollable_sheet.dart';
-import 'package:expense_tracker/presentation/statistic/money_statistic_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 

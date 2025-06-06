@@ -1,23 +1,15 @@
 import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:expense_tracker/core/data/local/sqflite/sqflite_client.dart';
 import 'package:expense_tracker/core/data/network/dio_client.dart';
-import 'package:expense_tracker/core/routing/app_routes.dart';
 import 'package:expense_tracker/core/widgets/bottom_navy_bar.dart';
-import 'package:expense_tracker/core/widgets/expense_indicator.dart';
-import 'package:expense_tracker/core/widgets/income_indicator.dart';
-import 'package:expense_tracker/core/widgets/transaction_record.dart';
 import 'package:expense_tracker/features/asset/service/asset_service.dart';
 import 'package:expense_tracker/features/asset/viewmodel/asset_store.dart';
 import 'package:expense_tracker/features/record/service/record_service.dart';
 import 'package:expense_tracker/features/record/viewmodel/record_store.dart';
-import 'package:expense_tracker/presentation/expense_list/expense_list_page.dart';
-import 'package:expense_tracker/presentation/layout/single_scrollable_sheet.dart';
 import 'package:expense_tracker/presentation/main_indicator_section/main_indicator_section.dart';
-import 'package:expense_tracker/presentation/statistic/money_statistic_page.dart';
 import 'package:expense_tracker/presentation/layout/scrollable_page.dart';
 import 'package:expense_tracker/presentation/expense_list/transaction_list.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'core/routing/router_configuration.dart';
