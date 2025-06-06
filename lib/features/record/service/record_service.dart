@@ -28,15 +28,15 @@ class RecordService {
     );
   }
 
-  FutureOr<List<Record>> getRecordsData() async {
+  Future<List<Record>> getRecordsData() async {
     try {
       final db = await _sqfliteClient.openConnectionToDb();
       final List<Map<String, dynamic>> maps = await db.query('record');
       List<Record> records = maps.map((map) => Record.fromMap(map)).toList();
-      // print("Fetched record: $maps");
+      print("Fetched record: $maps");
       return records;
     } catch (e) {
-      throw Exception('Failed to fetch records list: $e');
+      throw Exception('Service: Failed to fetch records list: $e');
     }
   }
 }
