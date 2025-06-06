@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/extensions/iterable_first_maker.dart';
 import 'package:expense_tracker/features/record/service/record_service.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
@@ -8,7 +9,7 @@ class RecordStore = _RecordStoreBase with _$RecordStore;
 
 abstract class _RecordStoreBase with Store {
   //Record service contains api to connect and interact with DB
-  late final RecordService recordService;
+  late final RecordService _recordService;
 
   @observable
   List<Record> _records = [];
@@ -16,17 +17,26 @@ abstract class _RecordStoreBase with Store {
   @computed
   int get length => _records.length;
 
-  _RecordStoreBase(recordService) {
+  @computed
+  List<Record> get records => _records;
+
+  _RecordStoreBase(RecordService recordService) {
     debugPrint("recordStore: init");
-    recordService = recordService;
+    _recordService = recordService;
     fetchRecordsData();
   }
+  
+  @computed
+  List<RecordDto> get filteredRecords =>
+      IterableFirstMaker.markFirstDateAndHourItems(
+        _records.map((record) => RecordDto(record: record)).toList()
+      );
 
   @action
   Future<void> fetchRecordsData() async {
     // Example of fetching data using SqliteClient
     try {
-      _records = await recordService.getRecordsData();
+      _records = await _recordService.getRecordsData();
       _records.forEach(
         (record) => print("Fetched Record: ${record.toMap()['money']}"),
       ); // equal to print("$asset");

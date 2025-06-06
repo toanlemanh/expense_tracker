@@ -15,6 +15,13 @@ mixin _$RecordStore on _RecordStoreBase, Store {
   int get length => (_$lengthComputed ??=
           Computed<int>(() => super.length, name: '_RecordStoreBase.length'))
       .value;
+  Computed<List<Record>>? _$recordsComputed;
+
+  @override
+  List<Record> get records =>
+      (_$recordsComputed ??= Computed<List<Record>>(() => super.records,
+              name: '_RecordStoreBase.records'))
+          .value;
 
   late final _$_recordsAtom =
       Atom(name: '_RecordStoreBase._records', context: context);
@@ -43,7 +50,8 @@ mixin _$RecordStore on _RecordStoreBase, Store {
   @override
   String toString() {
     return '''
-length: ${length}
+length: ${length},
+records: ${records}
     ''';
   }
 }
