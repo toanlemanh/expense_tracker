@@ -82,11 +82,11 @@ void main() async {
       providers: [
         Provider<AssetStore>(
           create: (_) => AssetStore(assetService),
-          // lazy: false, // comment cái này để disable lazy loading
+          lazy: true, // comment cái này để disable lazy loading
         ),
          Provider<RecordStore>(
           create: (_) => RecordStore(recordService),
-          // lazy: false, // comment cái này để disable lazy loading
+          lazy: true, // comment cái này để disable lazy loading
         ),
       ],
       child: const MyApp(),
