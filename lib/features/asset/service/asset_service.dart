@@ -25,11 +25,11 @@ class AssetService {
       final db = await _sqfliteClient.openConnectionToDb();
       final List<Map<String, dynamic>> maps = await db.query('assets');
       List<Asset> assets = maps.map((map) => Asset.fromMap(map)).toList();
-      // print("Fetched Asset: $maps");
+      print("Fetched Asset: $maps");
       return assets;
       
     } catch (e) {
-      throw Exception('Failed to fetch assets list: $e');
+      throw Exception('Service: Failed to fetch assets list: $e');
     }
   }
 }
