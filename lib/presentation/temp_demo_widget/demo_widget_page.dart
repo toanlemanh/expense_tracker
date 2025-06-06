@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/widgets/card_square_table_selector.dart';
 import 'package:expense_tracker/core/widgets/common/button_card_text.dart';
 import 'package:expense_tracker/core/widgets/common/button_card_text_under.dart';
 import 'package:expense_tracker/core/widgets/common/card_image.dart';
@@ -47,6 +48,20 @@ class DemoWidgetPage extends StatelessWidget {
             selectedIndex: 0,
             onChanged: (index) {
               debugPrint('Category changed: ${categoryOptions[index]}');
+            },
+          ),
+          CardSquareTableSelector(
+            imagePaths: [ 
+                          'assets/icons/categories/png/Avacado.png',
+                          'assets/icons/categories/png/Car.png',
+                          'assets/icons/categories/png/Gaming.png',
+                          'assets/icons/categories/png/Egg.png',
+                          'assets/icons/categories/png/Globe.png',
+                          'assets/icons/categories/png/Fries.png'
+                        ],
+            selectedIndex: 0,
+            onItemSelected: (index) {
+              debugPrint('Selected item index: $index');
             },
           )
         ],
