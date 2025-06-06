@@ -4,6 +4,8 @@ import 'package:expense_tracker/core/data/network/dio_client.dart';
 import 'package:expense_tracker/core/widgets/bottom_navy_bar.dart';
 import 'package:expense_tracker/features/asset/service/asset_service.dart';
 import 'package:expense_tracker/features/asset/viewmodel/asset_store.dart';
+import 'package:expense_tracker/presentation/temp_demo_widget/demo_widget_page.dart';
+import 'package:expense_tracker/data/sharedpref/shared_preference_color.dart';
 import 'package:expense_tracker/features/record/service/record_service.dart';
 import 'package:expense_tracker/features/record/viewmodel/record_store.dart';
 import 'package:expense_tracker/presentation/main_indicator_section/main_indicator_section.dart';
@@ -57,6 +59,8 @@ final colors = [
 ];
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await ImageColorStore().init(); // Khởi tạo màu ảnh 
   final dioClient = DioClient();
   final sqfliteClient = SqfliteClient();
   //init service
@@ -190,23 +194,38 @@ class _MainScaffoldState extends State<MainScaffold>
                     minChildSize: 0.7, // Can shrink to 10%
                     //maxChildSize: 1.0, // Can expand to 100%
                     builder: (context, scrollController) {
-                      return PageView.builder(
+                        return PageView(
                         clipBehavior: Clip.none,
                         controller: pageController,
                         scrollDirection: Axis.horizontal,
                         onPageChanged: (index) {
                           setState(() => _currentIndex = index);
                         },
-                        itemCount: 3,
-                        itemBuilder:
-                            (context, index) => ScrollablePage(
-                              key: PageStorageKey('page$index'),
-                              scrollController: scrollController,
-                              child: TransactionList(
-                                scrollController: scrollController,
-                              ),
-                            ),
-                      );
+                        children: [
+                          ScrollablePage(
+                          key: PageStorageKey('page0'),
+                          scrollController: scrollController,
+                          child: TransactionList(
+                            scrollController: scrollController,
+                          ),
+                          ),
+                          ScrollablePage(
+                          key: PageStorageKey('page1'),
+                          scrollController: scrollController,
+                          child: Center(child: Text('Wallet Page')),
+                          ),
+                          ScrollablePage(
+                          key: PageStorageKey('page2'),
+                          scrollController: scrollController,
+                          child: Center(child: Text('Settings Page')),
+                          ),
+                          ScrollablePage(
+                          key: PageStorageKey('page3'),
+                          scrollController: scrollController,
+                          child: DemoWidgetPage(),
+                          ),
+                        ],
+                        );
                     },
                   ),
                   // Floating BottomNavigationBar
@@ -262,6 +281,10 @@ class _MainScaffoldState extends State<MainScaffold>
                           BottomNavyBarItem(
                             icon: Icon(Icons.settings),
                             title: Center(child: Text('Settings')),
+                          ),
+                          BottomNavyBarItem(
+                            icon: Icon(Icons.developer_mode),
+                            title: Center(child: Text('Widgets')),
                           ),
                         ],
                       ),

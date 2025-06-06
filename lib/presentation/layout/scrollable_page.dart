@@ -86,7 +86,7 @@ class _ScrollablePageState extends State<ScrollablePage>
           // configure sau nay co the them vao mot muc moi de dang (Toan)
           // Lam 1 trang detail sample, moi ledger co mot type => truyen url 1 type
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
               child: Row(
                 children: [
                   Expanded(
