@@ -55,15 +55,13 @@ class Record {
 }
 
 final class RecordDto {
-  late final Record _record;
-  final bool _isFirstDateItem;
-  final bool _isFirstHourItem;
+  late final Record record;
+  bool isFirstDateItem;
+  bool isFirstHourItem;
 
   RecordDto({
-    required Record record,
-    bool isFirstDateItem = false,
-    bool isFirstHourItem = false,
-  }) : _record = record,
-       _isFirstDateItem = isFirstDateItem,
-       _isFirstHourItem = isFirstHourItem;
+    required this.record,
+    this.isFirstDateItem = false,
+    this.isFirstHourItem = false,
+  });
 }
