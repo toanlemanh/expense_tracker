@@ -11,9 +11,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("Dang o homescreen");
-    return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) => TransactionRecord(title: items[index], itemColor: colors[index]),
-    );
+    return const Text('Home screen');
   }
 }
