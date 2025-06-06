@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/widgets/common/default_widgets.dart';
 import 'package:flutter/material.dart';
 
 class TextInputRounded extends StatelessWidget {
@@ -19,9 +20,9 @@ class TextInputRounded extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String placeholder    = hintText ?? 'Enter text here';
-    Color backgroundColor = this.backgroundColor ?? const Color(0xFFFDF1DD);
-    TextStyle textStyle   = this.textStyle ?? const TextStyle(color: Colors.black87);
+    String placeholder    = hintText             ?? 'Enter text here';
+    Color backgroundColor = this.backgroundColor ?? DefaultWidget.backgroundColor;
+    TextStyle textStyle   = this.textStyle       ?? DefaultWidget.textStyle;
     TextStyle hintStyle   = textStyle.copyWith(color: Colors.grey,);
 
     return TextField(

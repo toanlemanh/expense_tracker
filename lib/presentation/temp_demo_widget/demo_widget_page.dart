@@ -41,7 +41,6 @@ class DemoWidgetPage extends StatelessWidget {
             onChanged: (value) {
               debugPrint('Text changed: $value');
             },
-            backgroundColor: const Color(0xFFFDF1DD),
           ),
           SingleChoiceSegmentedSelector(
             options: categoryOptions,
