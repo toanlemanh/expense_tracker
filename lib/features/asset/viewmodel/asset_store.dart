@@ -31,6 +31,7 @@ abstract class _AssetStoreBase with Store {
       // Handle response data
     } catch (e) {
       // Handle error
+       print('Failed to fetch asset list: $e');
     }
   }
 }
