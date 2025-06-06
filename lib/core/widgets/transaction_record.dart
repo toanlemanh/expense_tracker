@@ -14,11 +14,13 @@ class TransactionRecord extends StatelessWidget {
   final int itemColor;
   final int itemCreateHour;
   final bool willBuildIndicator;
+  final int money;
   const TransactionRecord({
     required this.title,
     required this.itemColor,
     required this.itemCreateHour,
     required this.willBuildIndicator,
+    required this.money,
     super.key,
   });
 
@@ -104,7 +106,7 @@ class TransactionRecord extends StatelessWidget {
               ),
             ),
             trailing: Text(
-              '-12000',
+              '$money',//kiem tra neu record type id income hay expense
               style: TextStyle(
                 color: appColors['fuzzyWuzzyBrown'],
                 fontSize: 18,

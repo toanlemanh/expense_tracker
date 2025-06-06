@@ -31,6 +31,7 @@ class TransactionList extends StatelessWidget {
                   itemCreateHour: recordStore.records[index].createTime,
                   willBuildIndicator:
                       recordStore.filteredRecords[index].isFirstHourItem,
+                      money: recordStore.records[index].money,
                 ),
               );
 
