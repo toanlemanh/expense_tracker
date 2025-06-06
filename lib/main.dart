@@ -236,7 +236,7 @@ class _MainScaffoldState extends State<MainScaffold>
                             _currentIndex = index;
                             pageController.animateToPage(
                               index,
-                              duration: Duration(milliseconds: 300),
+                              duration: Duration(milliseconds: 200),
                               curve: Curves.ease,
                             );
                           });
