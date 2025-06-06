@@ -1,6 +1,9 @@
 import 'package:expense_tracker/core/colors/app_colors.dart';
+import 'package:expense_tracker/core/extensions/date_time_format.dart';
 import 'package:expense_tracker/core/widgets/transaction_indicator.dart';
+import 'package:expense_tracker/features/record/viewmodel/record_store.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 var indicatorId =
@@ -9,15 +12,22 @@ var indicatorId =
 class TransactionRecord extends StatelessWidget {
   final String title;
   final int itemColor;
+  final int itemCreateHour;
+  final bool willBuildIndicator;
   const TransactionRecord({
     required this.title,
     required this.itemColor,
+    required this.itemCreateHour,
+    required this.willBuildIndicator,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    indicatorId++; // Tăng biến toàn cục mỗi khi tạo một TransactionRecord mới
+    print('willBuildIndicator $willBuildIndicator');
+    print('itemCreateHour ${DateTime.fromMillisecondsSinceEpoch(itemCreateHour).getHourLabel()}');
+
+    // indicatorId++; // Tăng biến toàn cục mỗi khi tạo một TransactionRecord mới
     return TimelineTile(
       lineXY: 0.05,
       alignment: TimelineAlign.manual,
@@ -27,10 +37,14 @@ class TransactionRecord extends StatelessWidget {
         width: 80,
         height: 40,
         padding: const EdgeInsets.symmetric(horizontal: 8),
-        drawGap: indicatorId % 2 == 0,
+        drawGap: willBuildIndicator,
         indicator:
-            indicatorId % 2 == 0
-                ? TransactionIndicator(itemColor: itemColor, itemTitle: title)
+            willBuildIndicator
+                ? TransactionIndicator(
+                  itemColor: itemColor,
+                  itemTitle: title,
+                  itemCreateHour: itemCreateHour,
+                )
                 : const SizedBox(), //keep layout
       ),
       beforeLineStyle: LineStyle(color: Color(itemColor)),
