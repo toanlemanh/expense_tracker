@@ -60,7 +60,7 @@ final colors = [
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await ImageColorStore().init(); // Khởi tạo màu ảnh 
+  await ImageColorStore().init(); // Khởi tạo màu ảnh
   final dioClient = DioClient();
   final sqfliteClient = SqfliteClient();
   //init service
@@ -80,7 +80,7 @@ void main() async {
           create: (_) => AssetStore(assetService),
           lazy: true, // comment cái này để disable lazy loading
         ),
-         Provider<RecordStore>(
+        Provider<RecordStore>(
           create: (_) => RecordStore(recordService),
           lazy: true, // comment cái này để disable lazy loading
         ),
@@ -175,7 +175,6 @@ class _MainScaffoldState extends State<MainScaffold>
     );
   }
 
-  final double topBarHeight = 80.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -190,11 +189,12 @@ class _MainScaffoldState extends State<MainScaffold>
                   _buildTopBar(),
                   // PageView covers the whole screen except for the floating bottom bar
                   DraggableScrollableSheet(
-                    initialChildSize: 1.0, // Start at full height
+                    initialChildSize: 0.7, // Start at full height
                     minChildSize: 0.7, // Can shrink to 10%
-                    //maxChildSize: 1.0, // Can expand to 100%
+                    // maxChildSize: 1.0, // Can expand to 100%
+                    expand: true,
                     builder: (context, scrollController) {
-                        return PageView(
+                      return PageView(
                         clipBehavior: Clip.none,
                         controller: pageController,
                         scrollDirection: Axis.horizontal,
@@ -203,29 +203,29 @@ class _MainScaffoldState extends State<MainScaffold>
                         },
                         children: [
                           ScrollablePage(
-                          key: PageStorageKey('page0'),
-                          scrollController: scrollController,
-                          child: TransactionList(
+                            key: PageStorageKey('page0'),
                             scrollController: scrollController,
-                          ),
-                          ),
-                          ScrollablePage(
-                          key: PageStorageKey('page1'),
-                          scrollController: scrollController,
-                          child: Center(child: Text('Wallet Page')),
+                            child: TransactionList(
+                              scrollController: scrollController,
+                            ),
                           ),
                           ScrollablePage(
-                          key: PageStorageKey('page2'),
-                          scrollController: scrollController,
-                          child: Center(child: Text('Settings Page')),
+                            key: PageStorageKey('page1'),
+                            scrollController: scrollController,
+                            child: Center(child: Text('Wallet Page')),
                           ),
                           ScrollablePage(
-                          key: PageStorageKey('page3'),
-                          scrollController: scrollController,
-                          child: DemoWidgetPage(),
+                            key: PageStorageKey('page2'),
+                            scrollController: scrollController,
+                            child: Center(child: Text('Settings Page')),
+                          ),
+                          ScrollablePage(
+                            key: PageStorageKey('page3'),
+                            scrollController: scrollController,
+                            child: DemoWidgetPage(),
                           ),
                         ],
-                        );
+                      );
                     },
                   ),
                   // Floating BottomNavigationBar
