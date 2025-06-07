@@ -22,10 +22,6 @@ class DemoWidgetPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const Text('Đề mô quít chét (s)'),
-          ButtonCardText( buttonText: Text('Button Card Text'),
-                          imagePath: 'assets/icons/categories/png/Car.png',
-                          onTap: _testOnTap
-                        ),
           CardImageSquare(
             imagePath: 'assets/icons/categories/png/Car.png',
             autoBackground: true,
