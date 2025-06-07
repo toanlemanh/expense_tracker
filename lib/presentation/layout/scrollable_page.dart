@@ -31,6 +31,9 @@ class _ScrollablePageState extends State<ScrollablePage>
   Widget build(BuildContext context) {
     super.build(context);
     // You can use widget.index as needed
+    //wrap singlechildscrollablewidget
+    //SingleChildScrollView(
+    // controller: widget.scrollController,
     return Container(
       decoration: BoxDecoration(
         color: appColors['pannel']!,
@@ -43,7 +46,6 @@ class _ScrollablePageState extends State<ScrollablePage>
           ),
         ],
       ),
-      //Column chứa cả đoạn con cá mập và transaction list
       child: Column(
         children: [
           // Drag handle
@@ -63,116 +65,102 @@ class _ScrollablePageState extends State<ScrollablePage>
                 margin: const EdgeInsets.only(bottom: 8),
               ),
               Positioned(
-                top: -25, // Adjust as needed to overlay more/less
+                top: -25,
                 left: 0,
                 right: 0,
                 child: Center(
                   child: Image.asset(
                     'assets/icons/tralalerotralala.png',
                     fit: BoxFit.contain,
-                    height: 40, // Adjust as needed
+                    height: 40,
                   ),
                 ),
               ),
             ],
           ),
-          // List cac option menu bao gom: ledger, category, bookmarks
-          //
-          //=> la cac nut bam dua den trang detail
-          // moi trang detail la mot page co layout don
-          //gian gom appbar, list va floating button
-          // @TODO: lam cac nut bam (Thanh dang lam do)
-          // lam tam cac nut bam co the chuyen sang trang khac (dung go router)
-          // configure sau nay co the them vao mot muc moi de dang (Toan)
-          // Lam 1 trang detail sample, moi ledger co mot type => truyen url 1 type
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () => context.go(AppRoutes.ledgers.path),
-                      child: const Center(child: Text('Ledger')),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () => context.go(AppRoutes.category.path),
-                      child: const Center(child: Text('Category')),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () => print('clickme Bookmarks'),
-                      child: const Center(child: Text('Bookmarks')),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () => print('clickme Bookmarks'),
-                      child: const Center(child: Text('Bookmarks')),
-                    ),
-                  ),
-                ],
-              ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 0.0,
+              vertical: 0.0,
             ),
-
-          // Transaction list trong này
-          // Transaction nhận 2 biến pagekey (theo idex) và scrollController của DraggableScrollableSheet
+            child: Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () => context.go(AppRoutes.ledgers.path),
+                    child: const Center(child: Text('Ledger')),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () => context.go(AppRoutes.category.path),
+                    child: const Center(child: Text('Category')),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () => print('clickme Bookmarks'),
+                    child: const Center(child: Text('Bookmarks')),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () => print('clickme Bookmarks'),
+                    child: const Center(child: Text('Bookmarks')),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Phan content, chi nhan duoc cac scrollable widget
           Expanded(
             child: PrimaryScrollController(
               controller: widget.scrollController,
-              child: Container(
-                // color: appColors['pannel'],
-                //typical TransactionRecord(title: items[index], itemColor: colors[index])
-                child: widget.child,
-              ),
-              //  widget.child,
+              child: widget.child,
             ),
           ),
+    
+          // LayoutBuilder(
+          //   builder:
+          //       (context, constraints) => PrimaryScrollController(
+          //         controller: widget.scrollController,
+          //         child: Container(
+          //           height: constraints.maxHeight,
+          //           // chir nhanj scrollview widget
+          //           child: widget.child,
+          //         ),
+          //       ),
+          // ),
         ],
       ),
     );
-
-    //  ListView.builder(
-    //   key: widget.key,
-    //   controller: widget.scrollController,
-    //   itemCount: items.length,
-    //   itemBuilder: (context, index) {
-    //     return Container(
-    //       // color: appColors['pannel'],
-    //       //typical TransactionRecord(title: items[index], itemColor: colors[index])
-    //       child: widget.child,
-    //     );
-    //   },
-    // );
   }
 
   @override
