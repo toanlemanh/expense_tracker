@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/widgets/pop_up_page.dart';
 import 'package:expense_tracker/presentation/layout/category_page.dart';
 import 'package:expense_tracker/presentation/layout/ledger_page.dart';
 import 'package:flutter/widgets.dart';
@@ -46,6 +47,15 @@ final routerConfigurations = GoRouter(
       pageBuilder:
           (context, state) => CustomTransitionPage(
             child: CategoryPage(),
+            transitionsBuilder: _buildTransitionAnimation,
+          ),
+    ),
+    GoRoute(
+      path: AppRoutes.bookmarks.path,
+      name: AppRoutes.bookmarks.name,
+      pageBuilder:
+          (context, state) => CustomTransitionPage(
+            child: PopUpPage(child: const Text('Bookmarks page')),
             transitionsBuilder: _buildTransitionAnimation,
           ),
     ),
