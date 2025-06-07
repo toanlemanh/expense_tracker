@@ -21,6 +21,9 @@ class DefaultWidget {
   // // Default accent color TODO: uncomment when actually use
   // static const Color accentColor = Colors.amber;
 
+  static const Color itemSelected   = Colors.red;
+  static const Color itemUnselected = Color(0x10000000);
+
   // Default background color
   static const Color backgroundColor = Color(0xFFFDF1DD);
 

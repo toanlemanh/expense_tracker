@@ -59,7 +59,7 @@ class DemoWidgetPage extends StatelessWidget {
                           'assets/icons/categories/png/Globe.png',
                           'assets/icons/categories/png/Fries.png'
                         ],
-            selectedIndex: 0,
+            selectedIndex: 0, // không có cái này thì không hiển thị chọn gì
             onItemSelected: (index) {
               debugPrint('Selected item index: $index');
             },
