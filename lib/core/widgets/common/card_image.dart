@@ -9,6 +9,7 @@ class CardImageSquare extends StatelessWidget {
   final VoidCallback?  onTap;
 
   static const double _defaultSize = 48.0;
+  static const double bonusPadding = 20;
 
   const CardImageSquare({
     super.key,
@@ -36,14 +37,17 @@ class CardImageSquare extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
         child: SizedBox(
-          width:  squareSize + 32, // 16 padding on both sides
-          height: squareSize + 32,
-          child: Center(
-            child: Image.asset(
-              imagePath,
-              width: squareSize,
-              height: squareSize,
-              fit: BoxFit.contain,
+          width:  squareSize + bonusPadding, // 16 padding on both sides
+          height: squareSize + bonusPadding,
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Center(
+              child: Image.asset(
+                imagePath,
+                width: squareSize,
+                height: squareSize,
+                fit: BoxFit.contain,
+              ),
             ),
           ),
         ),
