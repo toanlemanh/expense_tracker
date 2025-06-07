@@ -2,6 +2,8 @@ import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:expense_tracker/core/data/local/sqflite/sqflite_client.dart';
 import 'package:expense_tracker/core/data/network/dio_client.dart';
 import 'package:expense_tracker/core/widgets/bottom_navy_bar.dart';
+import 'package:expense_tracker/core/widgets/common/button_card_text.dart';
+import 'package:expense_tracker/core/widgets/common/card_image.dart';
 import 'package:expense_tracker/features/asset/service/asset_service.dart';
 import 'package:expense_tracker/features/asset/viewmodel/asset_store.dart';
 import 'package:expense_tracker/presentation/temp_demo_widget/demo_widget_page.dart';
@@ -60,7 +62,7 @@ final colors = [
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await ImageColorStore().init(); // Khởi tạo màu ảnh 
+  await ImageColorStore().init(); // Khởi tạo màu ảnh
   final dioClient = DioClient();
   final sqfliteClient = SqfliteClient();
   //init service
@@ -80,7 +82,7 @@ void main() async {
           create: (_) => AssetStore(assetService),
           lazy: true, // comment cái này để disable lazy loading
         ),
-         Provider<RecordStore>(
+        Provider<RecordStore>(
           create: (_) => RecordStore(recordService),
           lazy: true, // comment cái này để disable lazy loading
         ),
@@ -137,6 +139,11 @@ class _MainScaffoldState extends State<MainScaffold>
     super.dispose();
   }
 
+  //TODO: routing to default legder
+  void _testOnTap(BuildContext context) {
+    debugPrint("Default ledger page");
+  }
+
   Widget _buildTopBar() {
     return Column(
       children: [
@@ -145,27 +152,56 @@ class _MainScaffoldState extends State<MainScaffold>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: appColors['astrograniteDebris'],
-                  foregroundColor: Colors.white,
-                  textStyle: TextStyle(fontSize: 16),
+              ButtonCardText(
+                buttonText: RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: appColors['astrograniteDebris'],
+                    ),
+                    children: [
+                      TextSpan(
+                        text: 'Default \n',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: 'Ledger',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                onPressed: () {
-                  print("press me");
-                },
-                child: Text("Default ledger"),
+                imagePath: 'assets/icons/categories/png/Journal.png',
+                onTap: () => _testOnTap(context),
+                size: Size(60, 50),
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: appColors['astrograniteDebris'],
-                  foregroundColor: Colors.white,
-                  textStyle: TextStyle(fontSize: 16),
+              SizedBox(width: 40.0),
+              ButtonCardText(
+                buttonText: RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: appColors['astrograniteDebris'],
+                    ),
+                    children: [
+                      TextSpan(
+                        text: 'Setup \n',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: 'Budget',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                onPressed: () {
-                  print("press me");
-                },
-                child: Text("Setup Budget"),
+                imagePath: 'assets/icons/categories/png/Expedition.png',
+                onTap: () => _testOnTap(context),
+                size: Size(60, 50),
               ),
             ],
           ),
@@ -175,7 +211,6 @@ class _MainScaffoldState extends State<MainScaffold>
     );
   }
 
-  final double topBarHeight = 80.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -194,7 +229,7 @@ class _MainScaffoldState extends State<MainScaffold>
                     minChildSize: 0.7, // Can shrink to 10%
                     //maxChildSize: 1.0, // Can expand to 100%
                     builder: (context, scrollController) {
-                        return PageView(
+                      return PageView(
                         clipBehavior: Clip.none,
                         controller: pageController,
                         scrollDirection: Axis.horizontal,
@@ -203,29 +238,29 @@ class _MainScaffoldState extends State<MainScaffold>
                         },
                         children: [
                           ScrollablePage(
-                          key: PageStorageKey('page0'),
-                          scrollController: scrollController,
-                          child: TransactionList(
+                            key: PageStorageKey('page0'),
                             scrollController: scrollController,
-                          ),
-                          ),
-                          ScrollablePage(
-                          key: PageStorageKey('page1'),
-                          scrollController: scrollController,
-                          child: Center(child: Text('Wallet Page')),
+                            child: TransactionList(
+                              scrollController: scrollController,
+                            ),
                           ),
                           ScrollablePage(
-                          key: PageStorageKey('page2'),
-                          scrollController: scrollController,
-                          child: Center(child: Text('Settings Page')),
+                            key: PageStorageKey('page1'),
+                            scrollController: scrollController,
+                            child: Center(child: Text('Wallet Page')),
                           ),
                           ScrollablePage(
-                          key: PageStorageKey('page3'),
-                          scrollController: scrollController,
-                          child: DemoWidgetPage(),
+                            key: PageStorageKey('page2'),
+                            scrollController: scrollController,
+                            child: Center(child: Text('Settings Page')),
+                          ),
+                          ScrollablePage(
+                            key: PageStorageKey('page3'),
+                            scrollController: scrollController,
+                            child: DemoWidgetPage(),
                           ),
                         ],
-                        );
+                      );
                     },
                   ),
                   // Floating BottomNavigationBar
@@ -234,7 +269,7 @@ class _MainScaffoldState extends State<MainScaffold>
                     right: 16,
                     bottom: 16,
                     child: Container(
-                      padding: EdgeInsets.all(0),
+                      
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(30),
@@ -255,7 +290,7 @@ class _MainScaffoldState extends State<MainScaffold>
                             _currentIndex = index;
                             pageController.animateToPage(
                               index,
-                              duration: Duration(milliseconds: 300),
+                              duration: Duration(milliseconds: 500),
                               curve: Curves.ease,
                             );
                           });
@@ -266,24 +301,43 @@ class _MainScaffoldState extends State<MainScaffold>
                             inactiveColor: appColors['background'],
                             activeTextColor: appColors['astrograniteDebris'],
                             activeBackgroundColor:
-                                appColors['fuzzyWuzzyBrown']!,
-                            icon: Image.asset(
-                              'assets/icons/image.png',
-                              width: 24,
-                              height: 24,
+                                appColors['richBrilliantLavender']!,
+                            icon: Expanded(
+                              child: Image.asset('assets/icons/categories/png/Sun.png', fit: BoxFit.contain),
                             ),
                             title: Center(child: Text('Home')),
                           ),
                           BottomNavyBarItem(
-                            icon: Icon(Icons.wallet),
+                             activeColor: appColors['astrograniteDebris']!,
+                            inactiveColor: appColors['background'],
+                            activeTextColor: appColors['astrograniteDebris'],
+                            activeBackgroundColor:
+                                appColors['richBrilliantLavender']!,
+                            icon: Expanded(
+                              child: Image.asset('assets/icons/categories/png/Mountains.png', fit: BoxFit.contain),
+                            ),
                             title: Center(child: Text('Wallet')),
                           ),
                           BottomNavyBarItem(
-                            icon: Icon(Icons.settings),
+                             activeColor: appColors['astrograniteDebris']!,
+                            inactiveColor: appColors['background'],
+                            activeTextColor: appColors['astrograniteDebris'],
+                            activeBackgroundColor:
+                                appColors['richBrilliantLavender']!,
+                            icon: Expanded(
+                              child: Image.asset('assets/icons/categories/png/Tree.png', fit: BoxFit.contain),
+                            ),
                             title: Center(child: Text('Settings')),
                           ),
                           BottomNavyBarItem(
-                            icon: Icon(Icons.developer_mode),
+                             activeColor: appColors['astrograniteDebris']!,
+                            inactiveColor: appColors['background'],
+                            activeTextColor: appColors['astrograniteDebris'],
+                            activeBackgroundColor:
+                                appColors['richBrilliantLavender']!,
+                            icon: Expanded(
+                              child: Image.asset('assets/icons/categories/png/Vector-26.png', fit: BoxFit.contain),
+                            ),
                             title: Center(child: Text('Widgets')),
                           ),
                         ],
