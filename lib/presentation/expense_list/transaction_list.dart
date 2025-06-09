@@ -28,6 +28,8 @@ class TransactionList extends StatelessWidget {
                 TransactionRecord(
                   title: '${recordStore.records[index].money}',
                   itemColor: colors[index],
+                  //${recordStore.records[index].recordTypeId}
+                  imagePath: 'assets/icons/categories/png/Car.png',
                   itemCreateHour: recordStore.records[index].createTime,
                   willBuildIndicator:
                       recordStore.filteredRecords[index].isFirstHourItem,
