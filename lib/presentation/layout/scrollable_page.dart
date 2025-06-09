@@ -1,7 +1,6 @@
 import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:expense_tracker/core/routing/app_routes.dart';
-import 'package:expense_tracker/core/widgets/transaction_record.dart';
-import 'package:expense_tracker/main.dart';
+import 'package:expense_tracker/core/widgets/common/button_card_text_under.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -78,68 +77,53 @@ class _ScrollablePageState extends State<ScrollablePage>
               ),
             ],
           ),
+          // List cac option menu bao gom: ledger, category, bookmarks
+          //
+          //=> la cac nut bam dua den trang detail
+          // moi trang detail la mot page co layout don
+          //gian gom appbar, list va floating button
+          // @TODO: lam cac nut bam (Thanh dang lam do)
+          // lam tam cac nut bam co the chuyen sang trang khac (dung go router)
+          // configure sau nay co the them vao mot muc moi de dang (Toan)
+          // Lam 1 trang detail sample, moi ledger co mot type => truyen url 1 type
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 0.0,
-              vertical: 0.0,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0),
             child: Row(
               children: [
                 Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () => context.go(AppRoutes.ledgers.path),
-                    child: const Center(child: Text('Ledger')),
+                  child: ButtonCardTextUnder(
+                    imagePath: 'assets/icons/categories/png/Journal.png',
+                    onTap: () => context.go(AppRoutes.ledgers.path),
+                    buttonText: const Text('Ledger'),
+                    size: Size(30,30),
+                    
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 20),
                 Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () => context.go(AppRoutes.category.path),
-                    child: const Center(child: Text('Category')),
+                  child: ButtonCardTextUnder(
+                    imagePath: 'assets/icons/categories/png/Vector-22.png',
+                    onTap: () => context.go(AppRoutes.category.path),
+                    buttonText: const Text('Category'),
+                     size: Size(30,30),
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 20),
                 Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () => print('clickme Bookmarks'),
-                    child: const Center(child: Text('Bookmarks')),
+                  child:  ButtonCardTextUnder(
+                    imagePath: 'assets/icons/categories/png/Vector-13.png',
+                    onTap: () => context.go(AppRoutes.bookmarks.path),
+                    buttonText: const Text('Bookmarks'),
+                    size: Size(30,30),
                   ),
                 ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () => print('clickme Bookmarks'),
-                    child: const Center(child: Text('Bookmarks')),
-                  ),
-                ),
-              ],
+                // const SizedBox(width: 20),
+               ],
             ),
           ),
-          // Phan content, chi nhan duoc cac scrollable widget
+
+          // Transaction list trong này
+          // Transaction nhận 2 biến pagekey (theo idex) và scrollController của DraggableScrollableSheet
           Expanded(
             child: PrimaryScrollController(
               controller: widget.scrollController,

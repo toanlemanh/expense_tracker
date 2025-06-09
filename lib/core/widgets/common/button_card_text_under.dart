@@ -20,7 +20,7 @@ class ButtonCardTextUnder extends StatelessWidget {
   Widget build(BuildContext context) {
     final backgroundColor = ImageColorStore().getAveriColorLightest(imagePath);
     double size = this.size?.height ?? 40.0;
-    double padding = 12.0;
+    double padding = 8.0;
 
     return GestureDetector(
       onTap: onTap,

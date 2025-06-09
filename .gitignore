@@ -48,3 +48,11 @@ app.*.map.json
 
 # lemanhtoan Local test
 /lib/test
+
+# CocoaPods
+ios/Pods/
+ios/Podfile.lock
+
+# Flutter iOS
+ios/Flutter/GeneratedPluginRegistrant.swift
+

@@ -1,9 +1,10 @@
 import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:expense_tracker/core/extensions/date_time_format.dart';
+
+import 'package:expense_tracker/core/widgets/common/card_image.dart';
 import 'package:expense_tracker/core/widgets/transaction_indicator.dart';
-import 'package:expense_tracker/features/record/viewmodel/record_store.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 import 'package:timeline_tile/timeline_tile.dart';
 
 var indicatorId =
@@ -26,8 +27,8 @@ class TransactionRecord extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('willBuildIndicator $willBuildIndicator');
-    print('itemCreateHour ${DateTime.fromMillisecondsSinceEpoch(itemCreateHour).getHourLabel()}');
+    
+    
 
     // indicatorId++; // Tăng biến toàn cục mỗi khi tạo một TransactionRecord mới
     return TimelineTile(
@@ -63,7 +64,9 @@ class TransactionRecord extends StatelessWidget {
             color: Color(itemColor), // sử dụng itemColor
             borderRadius: BorderRadius.circular(20),
           ),
+
           child: ListTile(
+            isThreeLine: false,
             // tileColor: Color(0xFFC7E9E8),
             contentPadding: EdgeInsets.only(left: 8, right: 20),
             dense: true, // giảm khoảng cách giữa các dòng
@@ -91,22 +94,18 @@ class TransactionRecord extends StatelessWidget {
               ),
             ),
             subtitle: const Text('23:05'),
-            leading: SizedBox(
-              width: 50,
+            leading:
+            SizedBox(
               height: 50,
-
-              child: Container(
-                decoration:
-                // foregroundDecoration:
-                BoxDecoration(
-                  color: Color(0xff45e0fc), // lớp phủ đen mờ
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Center(child: Icon(Icons.shop, color: Colors.black)),
+              width: 50,
+              child: CardImageSquare(
+                imagePath: 'assets/icons/categories/png/Car.png',
+                autoBackground: true,
+                onTap: () {},
               ),
             ),
             trailing: Text(
-              '$money',//kiem tra neu record type id income hay expense
+              '$money', //kiem tra neu record type id income hay expense
               style: TextStyle(
                 color: appColors['fuzzyWuzzyBrown'],
                 fontSize: 18,
