@@ -202,7 +202,7 @@ INSERT INTO "RecordType" VALUES (10, 'type_traffic_fly', 'type_traffic_fly', 0, 
 INSERT INTO "RecordType" VALUES (11, 'type_shop_shoes_1', 'type_shop_shoes_1', 0, 10, 0, -1);
 INSERT INTO "RecordType" VALUES (12, 'type_shop_trousers', 'type_shop_shirt', 0, 11, 0, -1);
 INSERT INTO "RecordType" VALUES (13, 'type_shop_iwatch', 'type_shop_iwatch', 0, 12, 0, -1);
-INSERT INTO "RecordType" VALUES (14, 'type_shop_perfume', 'type_shop_perfume', 0, 13, 0, -1);
+INSERT INTO "RecordType" VALUES (14, 'type_shop_car', 'Car', 0, 13, 0, -1);
 INSERT INTO "RecordType" VALUES (15, 'type_happy_switch', 'type_happy_switch', 0, 14, 0, -1);
 INSERT INTO "RecordType" VALUES (16, 'type_sport_football', 'type_sport_football', 0, 15, 0, -1);
 INSERT INTO "RecordType" VALUES (17, 'type_medical_pill', 'type_medical_pill', 0, 16, 0, -1);
