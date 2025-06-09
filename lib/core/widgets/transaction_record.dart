@@ -15,12 +15,14 @@ class TransactionRecord extends StatelessWidget {
   final int itemColor;
   final int itemCreateHour;
   final bool willBuildIndicator;
+  final String imagePath;
   final int money;
   const TransactionRecord({
     required this.title,
     required this.itemColor,
     required this.itemCreateHour,
     required this.willBuildIndicator,
+    required this.imagePath,
     required this.money,
     super.key,
   });
@@ -99,7 +101,7 @@ class TransactionRecord extends StatelessWidget {
               height: 50,
               width: 50,
               child: CardImageSquare(
-                imagePath: 'assets/icons/categories/png/Car.png',
+                imagePath: imagePath,
                 autoBackground: true,
                 onTap: () {},
               ),
