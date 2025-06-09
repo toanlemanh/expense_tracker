@@ -1,6 +1,7 @@
 import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:expense_tracker/core/data/local/sqflite/sqflite_client.dart';
 import 'package:expense_tracker/core/data/network/dio_client.dart';
+import 'package:expense_tracker/core/routing/app_routes.dart';
 import 'package:expense_tracker/core/widgets/bottom_navy_bar.dart';
 import 'package:expense_tracker/core/widgets/common/button_card_text.dart';
 import 'package:expense_tracker/core/widgets/common/card_image.dart';
@@ -14,6 +15,7 @@ import 'package:expense_tracker/presentation/main_indicator_section/main_indicat
 import 'package:expense_tracker/presentation/layout/scrollable_page.dart';
 import 'package:expense_tracker/presentation/expense_list/transaction_list.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'core/routing/router_configuration.dart';
@@ -145,6 +147,29 @@ class _MainScaffoldState extends State<MainScaffold>
     debugPrint("Default ledger page");
   }
 
+  Widget? _buildFloatingActionButton(BuildContext context, String path) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 80.0, right: 0),
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 1,
+              blurRadius: 8,
+              offset: Offset(1, 2),
+            ),
+          ],
+        ),
+        child: CardImageSquare(
+          imagePath: 'assets/icons/categories/png/Car.png',
+          autoBackground: true,
+          onTap: () => context.go(path),
+        ),
+      ),
+    );
+  }
+
   Widget _buildTopBar() {
     return Column(
       children: [
@@ -216,6 +241,7 @@ class _MainScaffoldState extends State<MainScaffold>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: appColors['background']!,
+
       body: SafeArea(
         child: Column(
           children: [
@@ -231,17 +257,34 @@ class _MainScaffoldState extends State<MainScaffold>
                     // maxChildSize: 1.0, // Can expand to 100%
                     expand: true,
                     builder: (context, scrollController) {
-                      return PageView(
+                      return PageView
+                      // .builder
+                      (
                         clipBehavior: Clip.none,
                         controller: pageController,
                         scrollDirection: Axis.horizontal,
                         onPageChanged: (index) {
                           setState(() => _currentIndex = index);
                         },
+
+                        // itemCount: 4,
+                        // itemBuilder: (context, index) => ScrollablePage(
+                        //     key: PageStorageKey('page$index'),
+                        //     onTap: () => context.go(AppRoutes.category.path),
+                        //     scrollController: scrollController,
+                        //     child: TransactionList(
+                        //       scrollController: scrollController,
+                        //     ),
+                        //   ),
                         children: [
                           ScrollablePage(
                             key: PageStorageKey('page0'),
                             scrollController: scrollController,
+
+                            floatingActionButton: _buildFloatingActionButton(
+                              //TODO: thay path tuong ung
+                              context, AppRoutes.category.path
+                            ),
                             child: TransactionList(
                               scrollController: scrollController,
                             ),
@@ -249,16 +292,27 @@ class _MainScaffoldState extends State<MainScaffold>
                           ScrollablePage(
                             key: PageStorageKey('page1'),
                             scrollController: scrollController,
+                            floatingActionButton: _buildFloatingActionButton(
+                              //TODO: thay path tuong ung
+                              context, AppRoutes.category.path
+                            ),
                             child: Center(child: Text('Wallet Page')),
                           ),
                           ScrollablePage(
                             key: PageStorageKey('page2'),
                             scrollController: scrollController,
+                            floatingActionButton: _buildFloatingActionButton(
+                              //TODO: thay path tuong ung
+                              context, AppRoutes.category.path
+                            ),
+
                             child: Center(child: Text('Settings Page')),
                           ),
                           ScrollablePage(
                             key: PageStorageKey('page3'),
                             scrollController: scrollController,
+                            floatingActionButton: null,
+
                             child: DemoWidgetPage(),
                           ),
                         ],
@@ -271,7 +325,6 @@ class _MainScaffoldState extends State<MainScaffold>
                     right: 16,
                     bottom: 16,
                     child: Container(
-                      
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(30),
@@ -305,40 +358,52 @@ class _MainScaffoldState extends State<MainScaffold>
                             activeBackgroundColor:
                                 appColors['richBrilliantLavender']!,
                             icon: Expanded(
-                              child: Image.asset('assets/icons/categories/png/Sun.png', fit: BoxFit.contain),
+                              child: Image.asset(
+                                'assets/icons/categories/png/Sun.png',
+                                fit: BoxFit.contain,
+                              ),
                             ),
                             title: Center(child: Text('Home')),
                           ),
                           BottomNavyBarItem(
-                             activeColor: appColors['astrograniteDebris']!,
+                            activeColor: appColors['astrograniteDebris']!,
                             inactiveColor: appColors['background'],
                             activeTextColor: appColors['astrograniteDebris'],
                             activeBackgroundColor:
                                 appColors['richBrilliantLavender']!,
                             icon: Expanded(
-                              child: Image.asset('assets/icons/categories/png/Mountains.png', fit: BoxFit.contain),
+                              child: Image.asset(
+                                'assets/icons/categories/png/Mountains.png',
+                                fit: BoxFit.contain,
+                              ),
                             ),
                             title: Center(child: Text('Wallet')),
                           ),
                           BottomNavyBarItem(
-                             activeColor: appColors['astrograniteDebris']!,
+                            activeColor: appColors['astrograniteDebris']!,
                             inactiveColor: appColors['background'],
                             activeTextColor: appColors['astrograniteDebris'],
                             activeBackgroundColor:
                                 appColors['richBrilliantLavender']!,
                             icon: Expanded(
-                              child: Image.asset('assets/icons/categories/png/Tree.png', fit: BoxFit.contain),
+                              child: Image.asset(
+                                'assets/icons/categories/png/Tree.png',
+                                fit: BoxFit.contain,
+                              ),
                             ),
                             title: Center(child: Text('Settings')),
                           ),
                           BottomNavyBarItem(
-                             activeColor: appColors['astrograniteDebris']!,
+                            activeColor: appColors['astrograniteDebris']!,
                             inactiveColor: appColors['background'],
                             activeTextColor: appColors['astrograniteDebris'],
                             activeBackgroundColor:
                                 appColors['richBrilliantLavender']!,
                             icon: Expanded(
-                              child: Image.asset('assets/icons/categories/png/Vector-26.png', fit: BoxFit.contain),
+                              child: Image.asset(
+                                'assets/icons/categories/png/Vector-26.png',
+                                fit: BoxFit.contain,
+                              ),
                             ),
                             title: Center(child: Text('Widgets')),
                           ),
