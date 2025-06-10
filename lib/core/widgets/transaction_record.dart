@@ -17,6 +17,7 @@ class TransactionRecord extends StatelessWidget {
   final bool willBuildIndicator;
   final String imagePath;
   final int money;
+  final bool isIncome;
   const TransactionRecord({
     required this.title,
     required this.itemColor,
@@ -24,14 +25,12 @@ class TransactionRecord extends StatelessWidget {
     required this.willBuildIndicator,
     required this.imagePath,
     required this.money,
+    required this.isIncome,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    
-    
-
     // indicatorId++; // Tăng biến toàn cục mỗi khi tạo một TransactionRecord mới
     return TimelineTile(
       lineXY: 0.05,
@@ -96,8 +95,7 @@ class TransactionRecord extends StatelessWidget {
               ),
             ),
             subtitle: const Text('23:05'),
-            leading:
-            SizedBox(
+            leading: SizedBox(
               height: 50,
               width: 50,
               child: CardImageSquare(
@@ -107,10 +105,13 @@ class TransactionRecord extends StatelessWidget {
               ),
             ),
             trailing: Text(
-              '$money', //kiem tra neu record type id income hay expense
+              "${isIncome ? '+' : '-'}$money", //kiem tra neu record type id income hay expense
               style: TextStyle(
-                color: appColors['fuzzyWuzzyBrown'],
-                fontSize: 18,
+                color:
+                    isIncome
+                        ? appColors['astrograniteDebris']
+                        : appColors['fuzzyWuzzyBrown'],
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
             ),
