@@ -75,6 +75,7 @@ class TransactionRecord extends StatelessWidget {
               text: TextSpan(
                 style: TextStyle(
                   color: appColors['astrograniteDebris'],
+                  fontFamily: 'JetBrainsMono',
                   fontSize: 16,
                 ),
                 children: [
