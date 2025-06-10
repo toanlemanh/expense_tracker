@@ -29,4 +29,8 @@ extension DateTimeFormat on DateTime {
     return weekdays[weekday - 1];
   }
 
+  String getHourAndMinute(){
+    return "$hour:${minute < 10 ? '0$minute' : minute}";
+  }
+
 }
