@@ -157,7 +157,7 @@ class _MainScaffoldState extends State<MainScaffold>
               color: Colors.black.withOpacity(0.2),
               spreadRadius: 1,
               blurRadius: 8,
-              offset: Offset(1, 2),
+              offset: const Offset(1, 2),
             ),
           ],
         ),
@@ -188,11 +188,11 @@ class _MainScaffoldState extends State<MainScaffold>
                     children: [
                       TextSpan(
                         text: 'Default \n',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextSpan(
                         text: 'Ledger',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -201,9 +201,9 @@ class _MainScaffoldState extends State<MainScaffold>
                 ),
                 imagePath: 'assets/icons/categories/png/Journal.png',
                 onTap: () => _testOnTap(context),
-                size: Size(60, 50),
+                size: const Size(60, 50),
               ),
-              SizedBox(width: 40.0),
+              const SizedBox(width: 40.0),
               ButtonCardText(
                 buttonText: RichText(
                   text: TextSpan(
@@ -214,11 +214,11 @@ class _MainScaffoldState extends State<MainScaffold>
                     children: [
                       TextSpan(
                         text: 'Setup \n',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextSpan(
                         text: 'Budget',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -278,7 +278,7 @@ class _MainScaffoldState extends State<MainScaffold>
                         //   ),
                         children: [
                           ScrollablePage(
-                            key: PageStorageKey('page0'),
+                            key: const PageStorageKey('page0'),
                             scrollController: scrollController,
 
                             floatingActionButton: _buildFloatingActionButton(
@@ -290,7 +290,7 @@ class _MainScaffoldState extends State<MainScaffold>
                             ),
                           ),
                           ScrollablePage(
-                            key: PageStorageKey('page1'),
+                            key: const PageStorageKey('page1'),
                             scrollController: scrollController,
                             floatingActionButton: _buildFloatingActionButton(
                               //TODO: thay path tuong ung
@@ -299,7 +299,7 @@ class _MainScaffoldState extends State<MainScaffold>
                             child: Center(child: Text('Wallet Page')),
                           ),
                           ScrollablePage(
-                            key: PageStorageKey('page2'),
+                            key: const PageStorageKey('page2'),
                             scrollController: scrollController,
                             floatingActionButton: _buildFloatingActionButton(
                               //TODO: thay path tuong ung
@@ -309,7 +309,7 @@ class _MainScaffoldState extends State<MainScaffold>
                             child: Center(child: Text('Settings Page')),
                           ),
                           ScrollablePage(
-                            key: PageStorageKey('page3'),
+                            key: const PageStorageKey('page3'),
                             scrollController: scrollController,
                             floatingActionButton: null,
 
@@ -337,7 +337,7 @@ class _MainScaffoldState extends State<MainScaffold>
                         ],
                       ),
                       child: BottomNavyBar(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),
                         backgroundColor: appColors['pannel'],
                         selectedIndex: _currentIndex,
                         onItemSelected: (index) {
@@ -350,6 +350,7 @@ class _MainScaffoldState extends State<MainScaffold>
                             );
                           });
                         },
+                        itemPadding: EdgeInsets.symmetric(horizontal: 0,vertical: 0),
                         items: <BottomNavyBarItem>[
                           BottomNavyBarItem(
                             activeColor: appColors['astrograniteDebris']!,
@@ -363,7 +364,7 @@ class _MainScaffoldState extends State<MainScaffold>
                                 fit: BoxFit.contain,
                               ),
                             ),
-                            title: Center(child: Text('Home')),
+                            title: const Text('Home', style: TextStyle(fontSize: 10)),
                           ),
                           BottomNavyBarItem(
                             activeColor: appColors['astrograniteDebris']!,
@@ -377,7 +378,7 @@ class _MainScaffoldState extends State<MainScaffold>
                                 fit: BoxFit.contain,
                               ),
                             ),
-                            title: Center(child: Text('Wallet')),
+                            title: const Text('Wallet', style: TextStyle(fontSize: 10)),
                           ),
                           BottomNavyBarItem(
                             activeColor: appColors['astrograniteDebris']!,
@@ -391,7 +392,7 @@ class _MainScaffoldState extends State<MainScaffold>
                                 fit: BoxFit.contain,
                               ),
                             ),
-                            title: Center(child: Text('Settings')),
+                            title: const Text('Settings', style: TextStyle(fontSize: 10)),
                           ),
                           BottomNavyBarItem(
                             activeColor: appColors['astrograniteDebris']!,
@@ -405,7 +406,7 @@ class _MainScaffoldState extends State<MainScaffold>
                                 fit: BoxFit.contain,
                               ),
                             ),
-                            title: Center(child: Text('Widgets')),
+                            title: const Text('Widgets', style: TextStyle(fontSize: 10)),
                           ),
                         ],
                       ),
