@@ -14,7 +14,11 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     late final recordStore = Provider.of<RecordStore>(context);
+    int _income = 0;
+    int _expense = 0;
     // Placeholder for transaction items
+    //TODO: create a collector gradually count income, expense and reset
+    //each time meeting a transaction summary and stop.
     return Observer(
       builder:
           (context) => ListView.builder(
@@ -22,6 +26,10 @@ class TransactionList extends StatelessWidget {
             controller: scrollController,
             itemBuilder: (context, index) {
               List<Widget> widgets = [];
+
+              recordStore.records[index].recordTypeId >= 29
+                  ? _income += recordStore.records[index].money
+                  : _expense += recordStore.records[index].money;
 
               // Always add the TransactionRecord
               widgets.add(
@@ -33,7 +41,7 @@ class TransactionList extends StatelessWidget {
                   itemCreateHour: recordStore.records[index].createTime,
                   willBuildIndicator:
                       recordStore.filteredRecords[index].isFirstHourItem,
-                      money: recordStore.records[index].money,
+                  money: recordStore.records[index].money,
                 ),
               );
 
@@ -42,11 +50,14 @@ class TransactionList extends StatelessWidget {
                 widgets.insert(
                   0,
                   TransactionSummary(
+                    income: _income,
+                    expense: _expense,
                     createTime: recordStore.records[index].createTime,
                   ),
                 );
+                _income = 0;
+                _expense = 0;
               }
-
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: widgets,
