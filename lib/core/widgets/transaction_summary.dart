@@ -1,14 +1,17 @@
 import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:expense_tracker/core/extensions/date_time_format.dart';
-import 'package:expense_tracker/features/record/model/record.dart';
-import 'package:expense_tracker/features/record/viewmodel/record_store.dart';
 import 'package:flutter/widgets.dart';
-import 'package:path/path.dart';
-import 'package:provider/provider.dart';
 
 class TransactionSummary extends StatelessWidget {
   final int createTime;
-  const TransactionSummary({required this.createTime, super.key});
+  final int expense;
+  final int income;
+  const TransactionSummary({
+    required this.createTime,
+    required this.expense,
+    required this.income,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,9 @@ class TransactionSummary extends StatelessWidget {
               //  mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  DateTime.fromMillisecondsSinceEpoch(createTime).getDateLabel(),
+                  DateTime.fromMillisecondsSinceEpoch(
+                    createTime,
+                  ).getDateLabel(),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(width: 10),
@@ -32,7 +37,11 @@ class TransactionSummary extends StatelessWidget {
                     color: appColors['background'],
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Text(DateTime.fromMillisecondsSinceEpoch(createTime).getWeekDayLabel()),
+                  child: Text(
+                    DateTime.fromMillisecondsSinceEpoch(
+                      createTime,
+                    ).getWeekDayLabel(),
+                  ),
                 ),
               ],
             ),
@@ -44,16 +53,16 @@ class TransactionSummary extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 14,
                       fontFamily: 'JetBrainsMono',
                       fontWeight: FontWeight.bold,
                       color: appColors['astrograniteDebris'],
                     ),
                     children: [
-                      TextSpan(text: '+0'),
+                      TextSpan(text: '+$income'),
                       WidgetSpan(child: SizedBox(width: 10)),
                       TextSpan(
-                        text: '-250000',
+                        text: '-$expense',
                         style: TextStyle(color: appColors['fuzzyWuzzyBrown']),
                       ),
                     ],
