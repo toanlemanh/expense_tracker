@@ -95,7 +95,7 @@ class TransactionRecord extends StatelessWidget {
                 ],
               ),
             ),
-            subtitle: const Text('23:05'),
+            subtitle: Text(DateTime.fromMillisecondsSinceEpoch(itemCreateHour).getHourAndMinute()),
             leading: SizedBox(
               height: 50,
               width: 50,
