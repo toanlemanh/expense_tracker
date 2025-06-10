@@ -1,4 +1,3 @@
-import 'package:expense_tracker/core/extensions/date_time_format.dart';
 import 'package:expense_tracker/core/widgets/transaction_record.dart';
 import 'package:expense_tracker/core/widgets/transaction_summary.dart';
 import 'package:expense_tracker/features/record/viewmodel/record_store.dart';
@@ -14,8 +13,6 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     late final recordStore = Provider.of<RecordStore>(context);
-    int _income = 0;
-    int _expense = 0;
     // Placeholder for transaction items
     //TODO: create a collector gradually count income, expense and reset
     //each time meeting a transaction summary and stop.
@@ -27,10 +24,7 @@ class TransactionList extends StatelessWidget {
             itemBuilder: (context, index) {
               List<Widget> widgets = [];
 
-              recordStore.records[index].recordTypeId >= 29
-                  ? _income += recordStore.records[index].money
-                  : _expense += recordStore.records[index].money;
-
+              final isIncome = recordStore.records[index].recordTypeId >= 29;
               // Always add the TransactionRecord
               widgets.add(
                 TransactionRecord(
@@ -42,21 +36,29 @@ class TransactionList extends StatelessWidget {
                   willBuildIndicator:
                       recordStore.filteredRecords[index].isFirstHourItem,
                   money: recordStore.records[index].money,
+                  isIncome: isIncome,
                 ),
               );
 
               // Additionally add TransactionSummary if condition is true
               if (recordStore.filteredRecords[index].isFirstDateItem) {
+                int _id = index;
+                int _summaryIncome = 0;
+                int _summaryExpense = 0;
+                do {
+                  recordStore.records[_id].recordTypeId >= 29
+                  ? _summaryIncome += recordStore.records[_id].money
+                  : _summaryExpense += recordStore.records[_id].money;
+                  _id++;
+                } while (_id < recordStore.length && !recordStore.filteredRecords[_id].isFirstDateItem);
                 widgets.insert(
                   0,
                   TransactionSummary(
-                    income: _income,
-                    expense: _expense,
+                    income: _summaryIncome,
+                    expense: _summaryExpense,
                     createTime: recordStore.records[index].createTime,
                   ),
-                );
-                _income = 0;
-                _expense = 0;
+                );            
               }
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
