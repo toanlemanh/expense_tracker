@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:expense_tracker/core/extensions/iterable_first_maker.dart';
 import 'package:expense_tracker/features/record/service/record_service.dart';
 import 'package:flutter/widgets.dart';
@@ -44,6 +46,16 @@ abstract class _RecordStoreBase with Store {
     } catch (e) {
       // Handle error
       print('Failed to fetch record list: $e');
+    }
+  }
+
+  Record getRecordById(int recordId) {
+    try{
+      // Possibly, you cannot find the index
+      return _records.firstWhere((record) => record.id == recordId);
+    } catch (e){
+      print("Failed to get record by id");
+      return Record.nullRecord();
     }
   }
 }
