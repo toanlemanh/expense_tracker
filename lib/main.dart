@@ -7,6 +7,7 @@ import 'package:expense_tracker/core/widgets/common/button_card_text.dart';
 import 'package:expense_tracker/core/widgets/common/card_image.dart';
 import 'package:expense_tracker/features/asset/service/asset_service.dart';
 import 'package:expense_tracker/features/asset/viewmodel/asset_store.dart';
+import 'package:expense_tracker/features/record/service/record_type_service.dart';
 import 'package:expense_tracker/presentation/temp_demo_widget/demo_widget_page.dart';
 import 'package:expense_tracker/data/sharedpref/shared_preference_color.dart';
 import 'package:expense_tracker/features/record/service/record_service.dart';
@@ -65,7 +66,6 @@ final colors = [
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ImageColorStore().init(); // Khởi tạo màu ảnh
-  await ImageColorStore().init(); // Khởi tạo màu ảnh
   final dioClient = DioClient();
   final sqfliteClient = SqfliteClient();
   //init service
@@ -77,6 +77,10 @@ void main() async {
     dioClient: dioClient,
     sqfliteClient: sqfliteClient,
   );
+  // late final recordTypeService = RecordTypeService(
+  //   dioClient: dioClient,
+  //   sqfliteClient: sqfliteClient,
+  // );
 
   runApp(
     MultiProvider(
@@ -88,6 +92,14 @@ void main() async {
         Provider<RecordStore>(
           create: (_) => RecordStore(recordService),
           lazy: true, // comment cái này để disable lazy loading
+        ),
+        Provider<RecordTypeService>(
+          create:
+              (_) => RecordTypeService(
+                dioClient: dioClient,
+                sqfliteClient: sqfliteClient,
+              ),
+          lazy: true,
         ),
       ],
       child: const MyApp(),
@@ -283,7 +295,8 @@ class _MainScaffoldState extends State<MainScaffold>
 
                             floatingActionButton: _buildFloatingActionButton(
                               //TODO: thay path tuong ung
-                              context, AppRoutes.category.path
+                              context,
+                              AppRoutes.category.path,
                             ),
                             child: TransactionList(
                               scrollController: scrollController,
@@ -294,7 +307,8 @@ class _MainScaffoldState extends State<MainScaffold>
                             scrollController: scrollController,
                             floatingActionButton: _buildFloatingActionButton(
                               //TODO: thay path tuong ung
-                              context, AppRoutes.category.path
+                              context,
+                              AppRoutes.category.path,
                             ),
                             child: Center(child: Text('Wallet Page')),
                           ),
@@ -303,7 +317,8 @@ class _MainScaffoldState extends State<MainScaffold>
                             scrollController: scrollController,
                             floatingActionButton: _buildFloatingActionButton(
                               //TODO: thay path tuong ung
-                              context, AppRoutes.category.path
+                              context,
+                              AppRoutes.category.path,
                             ),
 
                             child: Center(child: Text('Settings Page')),
@@ -337,7 +352,9 @@ class _MainScaffoldState extends State<MainScaffold>
                         ],
                       ),
                       child: BottomNavyBar(
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(20),
+                        ),
                         backgroundColor: appColors['pannel'],
                         selectedIndex: _currentIndex,
                         onItemSelected: (index) {
@@ -350,7 +367,10 @@ class _MainScaffoldState extends State<MainScaffold>
                             );
                           });
                         },
-                        itemPadding: EdgeInsets.symmetric(horizontal: 0,vertical: 0),
+                        itemPadding: EdgeInsets.symmetric(
+                          horizontal: 0,
+                          vertical: 0,
+                        ),
                         items: <BottomNavyBarItem>[
                           BottomNavyBarItem(
                             activeColor: appColors['astrograniteDebris']!,
@@ -364,7 +384,10 @@ class _MainScaffoldState extends State<MainScaffold>
                                 fit: BoxFit.contain,
                               ),
                             ),
-                            title: const Text('Home', style: TextStyle(fontSize: 10)),
+                            title: const Text(
+                              'Home',
+                              style: TextStyle(fontSize: 10),
+                            ),
                           ),
                           BottomNavyBarItem(
                             activeColor: appColors['astrograniteDebris']!,
@@ -378,7 +401,10 @@ class _MainScaffoldState extends State<MainScaffold>
                                 fit: BoxFit.contain,
                               ),
                             ),
-                            title: const Text('Wallet', style: TextStyle(fontSize: 10)),
+                            title: const Text(
+                              'Wallet',
+                              style: TextStyle(fontSize: 10),
+                            ),
                           ),
                           BottomNavyBarItem(
                             activeColor: appColors['astrograniteDebris']!,
@@ -392,7 +418,10 @@ class _MainScaffoldState extends State<MainScaffold>
                                 fit: BoxFit.contain,
                               ),
                             ),
-                            title: const Text('Settings', style: TextStyle(fontSize: 10)),
+                            title: const Text(
+                              'Settings',
+                              style: TextStyle(fontSize: 10),
+                            ),
                           ),
                           BottomNavyBarItem(
                             activeColor: appColors['astrograniteDebris']!,
@@ -406,7 +435,10 @@ class _MainScaffoldState extends State<MainScaffold>
                                 fit: BoxFit.contain,
                               ),
                             ),
-                            title: const Text('Widgets', style: TextStyle(fontSize: 10)),
+                            title: const Text(
+                              'Widgets',
+                              style: TextStyle(fontSize: 10),
+                            ),
                           ),
                         ],
                       ),
