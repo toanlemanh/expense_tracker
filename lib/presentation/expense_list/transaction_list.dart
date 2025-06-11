@@ -1,6 +1,7 @@
 import 'package:expense_tracker/core/widgets/transaction_record.dart';
 import 'package:expense_tracker/core/widgets/transaction_summary.dart';
 import 'package:expense_tracker/features/record/model/record_type.dart';
+import 'package:expense_tracker/features/record/model/record.dart';
 import 'package:expense_tracker/features/record/service/record_type_service.dart';
 import 'package:expense_tracker/features/record/viewmodel/record_store.dart';
 import 'package:expense_tracker/main.dart';
@@ -32,8 +33,7 @@ class TransactionList extends StatelessWidget {
     );
   }
 
-
-//build future widget because get record type is future 
+  //build future widget because get record type is future
   Widget _buildRecord(
     RecordStore recordStore,
     RecordTypeService recordTypeService,
@@ -48,18 +48,18 @@ class TransactionList extends StatelessWidget {
           return const SizedBox.shrink();
         }
         final recordType = snapshot.data!;
-        final isIncome = recordStore.records[index].recordTypeId >= 29;
+        final record = recordStore.records[index];
+        final isIncome = record.recordTypeId >= 29;
         List<Widget> widgets = [];
 
         widgets.add(
           TransactionRecord(
-            title: '${recordType.name?.substring(10)}',
+            record: record,
+            title: '${recordType.name}',
             itemColor: colors[index], // Use your color logic
             imagePath: 'assets/icons/categories/png/Car.png',
-            itemCreateHour: recordStore.records[index].createTime,
             willBuildIndicator:
                 recordStore.filteredRecords[index].isFirstHourItem,
-            money: recordStore.records[index].money,
             isIncome: isIncome,
           ),
         );
@@ -80,7 +80,7 @@ class TransactionList extends StatelessWidget {
             TransactionSummary(
               income: _summaryIncome,
               expense: _summaryExpense,
-              createTime: recordStore.records[index].createTime,
+              createTime: record.createTime,
             ),
           );
         }
