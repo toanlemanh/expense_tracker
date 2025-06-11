@@ -33,4 +33,8 @@ extension DateTimeFormat on DateTime {
     return "$hour:${minute < 10 ? '0$minute' : minute}";
   }
 
+  String getMonthAndDayAndYear(){
+    return "${getDateLabel() } $year";
+  }
+
 }
