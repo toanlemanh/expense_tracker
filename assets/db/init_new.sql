@@ -191,21 +191,21 @@ CREATE TABLE "RecordType" (
 -- ----------------------------
 INSERT INTO "RecordType" VALUES (1, 'type_eat_hamburger', 'type_eat_hamburger', 0, 0, 0, -1);
 INSERT INTO "RecordType" VALUES (2, 'type_fruit_avocado', 'type_fruit_mango', 0, 1, 0, -1);
-INSERT INTO "RecordType" VALUES (3, 'type_eat_cola', 'type_eat_cola', 0, 2, 0, -1);
+INSERT INTO "RecordType" VALUES (3, 'drink', 'Drink.png', 0, 2, 0, -1);
 INSERT INTO "RecordType" VALUES (4, 'type_eat_cake', 'type_eat_bake', 0, 3, 0, -1);
 INSERT INTO "RecordType" VALUES (5, 'type_eat_noodle', 'type_eat_noodle', 0, 4, 0, -1);
 INSERT INTO "RecordType" VALUES (6, 'type_vegetable_carrot', 'type_vegetable_broccoli', 0, 5, 0, -1);
 INSERT INTO "RecordType" VALUES (7, 'type_eat_coffe', 'type_eat_coffe', 0, 6, 0, -1);
 INSERT INTO "RecordType" VALUES (8, 'type_traffic_jeep', 'type_traffic_mini', 0, 7, 0, -1);
-INSERT INTO "RecordType" VALUES (9, 'type_traffic_bus', 'type_traffic_bus', 0, 8, 0, -1);
+INSERT INTO "RecordType" VALUES (9, 'camera', 'Camera.png', 0, 8, 0, -1);
 INSERT INTO "RecordType" VALUES (10, 'type_traffic_fly', 'type_traffic_fly', 0, 9, 0, -1);
-INSERT INTO "RecordType" VALUES (11, 'type_shop_shoes_1', 'type_shop_shoes_1', 0, 10, 0, -1);
+INSERT INTO "RecordType" VALUES (11, 'console', 'Console.png', 0, 10, 0, -1);
 INSERT INTO "RecordType" VALUES (12, 'type_shop_trousers', 'type_shop_shirt', 0, 11, 0, -1);
 INSERT INTO "RecordType" VALUES (13, 'type_shop_iwatch', 'type_shop_iwatch', 0, 12, 0, -1);
-INSERT INTO "RecordType" VALUES (14, 'type_shop_car', 'Car', 0, 13, 0, -1);
+INSERT INTO "RecordType" VALUES (14, 'car', 'Car.png', 0, 13, 0, -1);
 INSERT INTO "RecordType" VALUES (15, 'type_happy_switch', 'type_happy_switch', 0, 14, 0, -1);
 INSERT INTO "RecordType" VALUES (16, 'type_sport_football', 'type_sport_football', 0, 15, 0, -1);
-INSERT INTO "RecordType" VALUES (17, 'type_medical_pill', 'type_medical_pill', 0, 16, 0, -1);
+INSERT INTO "RecordType" VALUES (17, 'camp', 'Camp.png', 0, 16, 0, -1);
 INSERT INTO "RecordType" VALUES (18, 'type_medical_tooth', 'type_medical_tooth', 0, 17, 0, -1);
 INSERT INTO "RecordType" VALUES (19, 'type_life_shampoo', 'type_life_shampoo', 0, 18, 0, -1);
 INSERT INTO "RecordType" VALUES (20, 'type_medical_heart', 'type_medical_heart', 0, 19, 0, -1);
@@ -217,7 +217,7 @@ INSERT INTO "RecordType" VALUES (25, 'type_life_express', 'type_life_express', 0
 INSERT INTO "RecordType" VALUES (26, 'type_pet_cat', 'type_pet_cat', 0, 25, 0, -1);
 INSERT INTO "RecordType" VALUES (27, 'type_pet_dog', 'type_pet_dog', 0, 26, 0, -1);
 INSERT INTO "RecordType" VALUES (28, 'type_pet_bowl', 'type_pet_food', 0, 27, 0, -1);
-INSERT INTO "RecordType" VALUES (29, 'type_income_cash', 'type_income_cash', 1, 1, 0, -1);
+INSERT INTO "RecordType" VALUES (29, 'mobile', 'Mobile.png', 1, 1, 0, -1);
 INSERT INTO "RecordType" VALUES (30, 'type_income_safebox', 'type_income_safebox', 1, 2, 0, -1);
 INSERT INTO "RecordType" VALUES (31, 'type_income_save_money', 'type_income_save_money', 1, 3, 0, -1);
 INSERT INTO "RecordType" VALUES (32, 'type_income_money_managemnt', 'type_income_money_managemnt', 1, 4, 0, -1);
