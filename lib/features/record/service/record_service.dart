@@ -18,15 +18,11 @@ class RecordService {
     _sqfliteClient = sqfliteClient;
   }
 
-  factory RecordService({
-    DioClient? dioClient,
-    required SqfliteClient sqfliteClient,
-  }) {
-    return _instance ??= RecordService._internal(
-      dioClient: dioClient,
-      sqfliteClient: sqfliteClient,
-    );
-  }
+  factory RecordService({DioClient? dioClient,required SqfliteClient sqfliteClient,}) =>
+      _instance ??= RecordService._internal(
+        dioClient: dioClient,
+        sqfliteClient: sqfliteClient,
+      );
 
   Future<List<Record>> getRecordsData() async {
     try {
