@@ -23,6 +23,19 @@ class Record {
     required this.star,
   });
 
+  static Record nullRecord() {
+    return Record(
+      money: 0,
+      time: 0,
+      createTime: 0,
+      recordTypeId: 0,
+      recurrenceId: 0,
+      ledgerId: 0,
+      star: 0,
+      remark: 'Null transaction record'
+    );
+  }
+
   factory Record.fromMap(Map<String, dynamic> map) {
     return Record(
       id: map['id'] as int?,
