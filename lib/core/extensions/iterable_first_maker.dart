@@ -12,7 +12,7 @@ class IterableFirstMaker {
       int curHour = curDateTime.hour;
       int curDateKey =
           curDateTime.year * 10000 + curDateTime.month * 100 + curDateTime.day;
-      print("lastDateKey $lastDateKey vs curDateKey $curDateKey");
+      //print("lastDateKey $lastDateKey vs curDateKey $curDateKey");
       // Mark first item of a new date
       if (lastDateKey != curDateKey) {
         recordDto.isFirstDateItem = true;
@@ -25,7 +25,7 @@ class IterableFirstMaker {
         recordDto.isFirstHourItem = true;
         lastHour = curHour;
       }
-      print('Hour ${DateTime.fromMillisecondsSinceEpoch(curHour).getHourLabel()}');
+     // print('Hour ${DateTime.fromMillisecondsSinceEpoch(curHour).getHourLabel()}');
     }
     return recordDtos;
   }
