@@ -1,30 +1,25 @@
 import 'package:expense_tracker/core/colors/app_colors.dart';
 import 'package:expense_tracker/core/extensions/date_time_format.dart';
-
 import 'package:expense_tracker/core/widgets/common/card_image.dart';
+import 'package:expense_tracker/core/widgets/common/view_modal.dart';
 import 'package:expense_tracker/core/widgets/transaction_indicator.dart';
 import 'package:flutter/material.dart';
-
+import 'package:expense_tracker/features/record/model/record.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
-var indicatorId =
-    0; // Biến toàn cục để xác định có hiển thị indicator hay không
-
 class TransactionRecord extends StatelessWidget {
+  final Record record;
   final String title;
   final int itemColor;
-  final int itemCreateHour;
   final bool willBuildIndicator;
   final String imagePath;
-  final int money;
   final bool isIncome;
   const TransactionRecord({
+    required this.record,
     required this.title,
     required this.itemColor,
-    required this.itemCreateHour,
     required this.willBuildIndicator,
     required this.imagePath,
-    required this.money,
     required this.isIncome,
     super.key,
   });
@@ -47,7 +42,7 @@ class TransactionRecord extends StatelessWidget {
                 ? TransactionIndicator(
                   itemColor: itemColor,
                   itemTitle: title,
-                  itemCreateHour: itemCreateHour,
+                  itemCreateHour: record.createTime,
                 )
                 : const SizedBox(), //keep layout
       ),
@@ -95,18 +90,17 @@ class TransactionRecord extends StatelessWidget {
                 ],
               ),
             ),
-            subtitle: Text(DateTime.fromMillisecondsSinceEpoch(itemCreateHour).getHourAndMinute()),
+            subtitle: Text(DateTime.fromMillisecondsSinceEpoch(record.createTime).getHourAndMinute()),
             leading: SizedBox(
               height: 50,
               width: 50,
               child: CardImageSquare(
                 imagePath: imagePath,
                 autoBackground: true,
-                onTap: () {},
               ),
             ),
             trailing: Text(
-              "${isIncome ? '+' : '-'}$money", //kiem tra neu record type id income hay expense
+              "${isIncome ? '+' : '-'}${record.money}", //kiem tra neu record type id income hay expense
               style: TextStyle(
                 color:
                     isIncome
@@ -119,7 +113,13 @@ class TransactionRecord extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () => print(title),
+      onTap: () => showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (context){
+          //record index starts from 1 while id starts from 0
+          return ViewModal(id: record.id, isIncome: isIncome);
+        }),
     );
   }
 }
