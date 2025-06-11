@@ -12,19 +12,35 @@ mixin _$RecordStore on _RecordStoreBase, Store {
   Computed<int>? _$lengthComputed;
 
   @override
-  int get length => (_$lengthComputed ??=
-          Computed<int>(() => super.length, name: '_RecordStoreBase.length'))
-      .value;
+  int get length =>
+      (_$lengthComputed ??= Computed<int>(
+            () => super.length,
+            name: '_RecordStoreBase.length',
+          ))
+          .value;
   Computed<List<Record>>? _$recordsComputed;
 
   @override
   List<Record> get records =>
-      (_$recordsComputed ??= Computed<List<Record>>(() => super.records,
-              name: '_RecordStoreBase.records'))
+      (_$recordsComputed ??= Computed<List<Record>>(
+            () => super.records,
+            name: '_RecordStoreBase.records',
+          ))
+          .value;
+  Computed<List<RecordDto>>? _$filteredRecordsComputed;
+
+  @override
+  List<RecordDto> get filteredRecords =>
+      (_$filteredRecordsComputed ??= Computed<List<RecordDto>>(
+            () => super.filteredRecords,
+            name: '_RecordStoreBase.filteredRecords',
+          ))
           .value;
 
-  late final _$_recordsAtom =
-      Atom(name: '_RecordStoreBase._records', context: context);
+  late final _$_recordsAtom = Atom(
+    name: '_RecordStoreBase._records',
+    context: context,
+  );
 
   @override
   List<Record> get _records {
@@ -39,8 +55,10 @@ mixin _$RecordStore on _RecordStoreBase, Store {
     });
   }
 
-  late final _$fetchRecordsDataAsyncAction =
-      AsyncAction('_RecordStoreBase.fetchRecordsData', context: context);
+  late final _$fetchRecordsDataAsyncAction = AsyncAction(
+    '_RecordStoreBase.fetchRecordsData',
+    context: context,
+  );
 
   @override
   Future<void> fetchRecordsData() {
@@ -51,7 +69,8 @@ mixin _$RecordStore on _RecordStoreBase, Store {
   String toString() {
     return '''
 length: ${length},
-records: ${records}
+records: ${records},
+filteredRecords: ${filteredRecords}
     ''';
   }
 }
